@@ -1,6 +1,6 @@
 # Task Master
 
-## What we did?
+## What we do today?
 We create three activity: one for the main page to show image with two buttuon one of them for add task and the other one to show all of the tasks. Also, we create an add task activity which allow to us to enter our tasks and the last activity to show all the tasks that user added and We will add the functionality of them later. 
 
 ## screenshot
