@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    tools:layout_editor_absoluteX="7dp"
+    tools:layout_editor_absoluteY="64dp">
 
     <Button
         android:id="@+id/add_task"
@@ -12,7 +14,7 @@
         android:layout_height="64dp"
         android:layout_marginStart="80dp"
         android:layout_marginEnd="40dp"
-        android:layout_marginBottom="185dp"
+        android:layout_marginBottom="120dp"
         android:text="Add Task"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/all_task"
@@ -33,24 +35,76 @@
         android:id="@+id/textView"
         android:layout_width="107dp"
         android:layout_height="40dp"
-        android:layout_marginTop="103dp"
+        android:layout_marginTop="48dp"
         android:text="My Task"
         android:textSize="24dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/logo_id"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.115" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/logo_id"
-        android:layout_width="268dp"
-        android:layout_height="240dp"
-        android:layout_marginBottom="296dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="231dp"
+        android:layout_height="204dp"
+        android:layout_marginTop="36dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView"
         app:srcCompat="@drawable/logo" />
+
+    <Button
+        android:id="@+id/android_task"
+        android:layout_width="200dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="118dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="119dp"
+        android:text="Edit the home page"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logo_id" />
+
+    <Button
+        android:id="@+id/coffee_task"
+        android:layout_width="200dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="118dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="119dp"
+        android:text="Drink Coffee"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.461"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/android_task" />
+
+    <Button
+        android:id="@+id/design_task"
+        android:layout_width="200dp"
+        android:layout_height="39dp"
+        android:layout_marginStart="118dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="119dp"
+        android:text="Design the Page"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/coffee_task" />
+
+    <TextView
+        android:id="@+id/txt_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="123dp"
+
+        android:layout_marginEnd="123dp"
+        android:layout_marginBottom="55dp"
+        android:text="Please Set Your Username"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/design_task"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
