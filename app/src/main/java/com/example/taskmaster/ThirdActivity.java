@@ -13,9 +13,5 @@ public class ThirdActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_third3);
 
-//        Bundle bundle = getIntent().getExtras();
-//        TextView allTasks = findViewById(R.id.show_tasks);
-//        String task = bundle.getString("PassingTest");
-//        allTasks.setText(task+"\n");
     }
 }
