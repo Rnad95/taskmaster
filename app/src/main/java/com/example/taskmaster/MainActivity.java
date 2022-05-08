@@ -120,6 +120,7 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+    private String[]  citties ={"",""};
 
     private void navigateToTaskDetails(int taskId) {
         Intent taskDetailsIntent = new Intent(this, TaskDetails.class);
