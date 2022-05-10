@@ -28,3 +28,11 @@ We create three activity: one for the main page to show image with two buttuon o
 3. add a navigation bar in the top bar.
 4. show the user name inside the home page
 ![navbar](screenshots/navbar.jpeg)
+
+## Lab - 29
+
+The database saved the new task with the state of this task and the description.
+
+![edit main Page](screenshots/Lab-29/main_Page.jpeg)
+![Add task Page](screenshots/Lab-29/addTask.jpeg)
+![All of the Tasks](screenshots/Lab-29/Tasks.jpeg)

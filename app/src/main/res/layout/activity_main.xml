@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    tools:layout_editor_absoluteX="7dp"
-    tools:layout_editor_absoluteY="64dp">
+    tools:layout_editor_absoluteX="92dp"
+    tools:layout_editor_absoluteY="-119dp">
 
     <Button
         android:id="@+id/add_task"
@@ -14,7 +14,7 @@
         android:layout_height="64dp"
         android:layout_marginStart="80dp"
         android:layout_marginEnd="40dp"
-        android:layout_marginBottom="120dp"
+        android:layout_marginBottom="84dp"
         android:text="Add Task"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/all_task"
@@ -31,66 +31,60 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/add_task" />
 
+
     <TextView
         android:id="@+id/textView"
-        android:layout_width="107dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="48dp"
+        android:layout_width="174dp"
+        android:layout_height="62dp"
+        android:layout_marginTop="84dp"
         android:text="My Task"
-        android:textSize="24dp"
+        android:textSize="45dp"
         android:textStyle="bold"
+        android:fontFamily="cursive"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.118"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/logo_id"
-        android:layout_width="231dp"
-        android:layout_height="204dp"
-        android:layout_marginTop="36dp"
+        android:layout_width="334dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="112dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:srcCompat="@drawable/logo" />
 
-
     <Button
-        android:id="@+id/android_task"
-        android:layout_width="200dp"
-        android:layout_height="39dp"
-        android:layout_marginStart="118dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="119dp"
-        android:text="Edit the home page"
+        android:id="@+id/design_task"
+        android:layout_width="166dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="32dp"
+        android:text="Design the Page"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logo_id" />
+        app:layout_constraintTop_toBottomOf="@+id/coffee_task" />
 
     <Button
         android:id="@+id/coffee_task"
-        android:layout_width="200dp"
-        android:layout_height="39dp"
-        android:layout_marginStart="118dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="119dp"
+        android:layout_width="167dp"
+        android:layout_height="37dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
         android:text="Drink Coffee"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.461"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/android_task" />
 
     <Button
-        android:id="@+id/design_task"
-        android:layout_width="200dp"
+        android:id="@+id/android_task"
+        android:layout_width="164dp"
         android:layout_height="39dp"
-        android:layout_marginStart="118dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="119dp"
-        android:text="Design the Page"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="32dp"
+        android:text="Edit the home page"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/coffee_task" />
-
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/txt_username"
@@ -109,14 +103,5 @@
         app:layout_constraintTop_toBottomOf="@+id/design_task"
         app:layout_constraintVertical_bias="1.0" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
-        android:layout_width="344dp"
-        android:layout_height="31dp"
-        android:layout_marginBottom="184dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.597"
-        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

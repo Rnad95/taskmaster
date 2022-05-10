@@ -11,11 +11,13 @@ public class TaskDetails extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_task_details);
-//
+
         Bundle bundle = getIntent().getExtras();
         TextView allTasks = findViewById(R.id.task_titlte_details_page);
         String task = bundle.getString("PassingTest");
         allTasks.setText(task);
+
+
 
     }
 
