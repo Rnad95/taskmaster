@@ -34,10 +34,10 @@
 
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.2"
+            app:layout_constraintHorizontal_bias="0.524"
             app:layout_constraintStart_toEndOf="@+id/title_frag"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.102" />
+            app:layout_constraintVertical_bias="0.036" />
 
         <TextView
             android:id="@+id/body_frag"
@@ -45,23 +45,13 @@
             android:layout_height="40dp"
             android:layout_marginStart="20dp"
 
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="40dp"
             android:text="TextView"
             android:textSize="15dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.338"
+            app:layout_constraintHorizontal_bias="0.307"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/state_frag" />
-
-        <Button
-            android:id="@+id/details"
-            android:layout_width="109dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="16dp"
-            android:text="Details"
-            app:layout_constraintBottom_toTopOf="@+id/body_frag"
-            app:layout_constraintStart_toEndOf="@+id/state_frag" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

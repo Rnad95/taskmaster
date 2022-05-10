@@ -1,6 +1,5 @@
 package com.example.taskmaster;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,27 +13,44 @@ import java.util.List;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder> {
     List<Task> allTaskData = new ArrayList<>();
+    private  OnTaskListner mOnTaskListener;
 
     public  TaskAdapter (ArrayList<Task> allTaskData){
         this.allTaskData = allTaskData;
 
     }
 
-    public static class TaskViewHolder extends RecyclerView.ViewHolder{
+    public  TaskAdapter (ArrayList<Task> allTaskData, OnTaskListner mOnTaskListner){
+        this.allTaskData = allTaskData;
+        this.mOnTaskListener = mOnTaskListner;
+
+    }
+
+    public static class TaskViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         public Task task;
         View itemView;
+        OnTaskListner onTaskListner;
 
-        public TaskViewHolder(@NonNull View itemView) {
+        public TaskViewHolder(@NonNull View itemView, OnTaskListner onTaskListner) {
             super(itemView);
             this.itemView = itemView;
+            this.onTaskListner = onTaskListner;
+            itemView.setOnClickListener(this);
 
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Log.d("my Adapter", "Element "+ getAdapterPosition() + " clicked");
-                }
-            });
+        }
+
+//        public TaskViewHolder(@NonNull View itemView) {
+//            super(itemView);
+//            this.itemView = itemView;
+//            itemView.setOnClickListener(this);
+//
+//        }
+
+
+        @Override
+        public void onClick(View view) {
+            onTaskListner.onTaskListener(getAdapterPosition());
         }
     }
 
@@ -43,7 +59,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     public TaskViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_task, parent , false);
-        return  new TaskViewHolder(view);
+        return  new TaskViewHolder(view, mOnTaskListener);
     }
 
     @Override
@@ -66,7 +82,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     }
 
 
-    public interface onTaskListner{
+    public interface OnTaskListner {
         void  onTaskListener(int position);
     }
 

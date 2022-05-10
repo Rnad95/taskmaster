@@ -1,31 +1,24 @@
 package com.example.taskmaster;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class ThirdActivity extends AppCompatActivity implements TaskAdapter.onTaskListner{
-    ArrayList<Task> taskData = new ArrayList<>();
+public class ThirdActivity extends AppCompatActivity implements TaskAdapter.OnTaskListner {
+    public ArrayList<Task> taskData = new ArrayList<>();
+    ArrayList<Task> allTasks;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_third3);
 
 
-
-
-        taskData.add(new Task("Reading","Read Your Book",State.PROGRESS));
+//        taskData.add(new Task("Reading","Read Your Book",State.PROGRESS));
 //        taskData.add(new Task("Coffee","Take Your Break and breath",State.COMPLETE));
 
         // get the Recycler view
@@ -39,16 +32,19 @@ public class ThirdActivity extends AppCompatActivity implements TaskAdapter.onTa
 
         Bundle bundle = getIntent().getExtras();
         Task task  = (Task) getIntent().getSerializableExtra("PassingTask");
-        ArrayList<Task> allTasks= (ArrayList<Task>) AppDatabase.getInstance(getApplicationContext()).studentDao().getAll();
-        allTaskRecyclerView.setAdapter(new TaskAdapter(allTasks));
-
+        allTasks= (ArrayList<Task>) AppDatabase.getInstance(getApplicationContext()).taskDao().getAll();
+        allTaskRecyclerView.setAdapter(new TaskAdapter(allTasks,this));
 
     }
 
     @Override
     public void onTaskListener(int position) {
-        taskData.get(position);
-        Intent intent = new Intent(this, TaskDetails.class);
+        Intent intent = new Intent(getApplicationContext(), TaskDetails.class);
+        System.out.println("***************** POSITION ==>"+ position);
+        intent.putExtra("SpecificData",allTasks.get(position).getTitle());
+        intent.putExtra("stateData",allTasks.get(position).getState().toString());
+        intent.putExtra("bodyData",allTasks.get(position).getBody());
+
         startActivity(intent);
     }
 }

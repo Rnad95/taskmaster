@@ -17,7 +17,7 @@ import android.widget.Toast;
  * create an instance of this fragment.
  */
 public class TaskFragment extends Fragment {
-    private Button btnDetails;
+//    private Button btnDetails;
     // TODO: Rename parameter arguments, choose names that match
     private static final String ARG_PARAM1 = "title";
     private static final String ARG_PARAM2 = "body";
@@ -58,16 +58,16 @@ public class TaskFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_task,container,false);
-        btnDetails = view.findViewById(R.id.details);
-        btnDetails.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getActivity(),TaskDetails.class);
-                startActivity(intent);
-//                Toast.makeText(getActivity(), "Clicked", Toast.LENGTH_SHORT).show();
-
-            }
-        });
+//        btnDetails = view.findViewById(R.id.details);
+//        btnDetails.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getActivity(),TaskDetails.class);
+//                startActivity(intent);
+////                Toast.makeText(getActivity(), "Clicked", Toast.LENGTH_SHORT).show();
+//
+//            }
+//        });
 
         // Inflate the layout for this fragment
 //        return inflater.inflate(R.layout.fragment_task, container, false);

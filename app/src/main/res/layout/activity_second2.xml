@@ -77,13 +77,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/task_desc" />
 
-    <com.google.android.material.textfield.TextInputEditText
+    <Spinner
         android:id="@+id/state_of_task"
-        android:layout_width="339dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="28dp"
+        android:layout_width="245dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="20dp"
         android:hint="Choose your state"
+        android:entries="@array/state"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/task_state" />
 

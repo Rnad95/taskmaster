@@ -8,8 +8,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/show_recycler_view"
-        android:layout_width="404dp"
-        android:layout_height="379dp"
+        android:layout_width="400dp"
+        android:layout_height="415dp"
         android:layout_marginBottom="212dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,7 +22,7 @@
         android:layout_width="133dp"
         android:layout_height="55dp"
         android:layout_marginStart="136dp"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="48dp"
         android:text="   Tasks"
         android:textSize="30dp"
         app:layout_constraintStart_toStartOf="parent"
