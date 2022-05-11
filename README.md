@@ -13,6 +13,7 @@ We create three activity: one for the main page to show image with two buttuon o
 - Activity to show all of the tasks
 ![image three](https://i.ibb.co/wsGBywy/photo1650898777.jpg)
 
+
 ## Lab - 27
 
 - The following function is handled:
@@ -37,3 +38,4 @@ The database saved the new task with the state of this task and the description.
 ![Add task Page](screenshots/Lab-29/addtask.jpeg)
 ![All of the Tasks](screenshots/Lab-29/tasks.jpeg)
 ![details of the Task](screenshots/Lab-29/details.jpeg)
+
