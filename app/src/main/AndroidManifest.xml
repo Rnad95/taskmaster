@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TaskMaster">
         <activity
+            android:name=".TaskFragment"
+            android:exported="false" />
+        <activity
             android:name=".SettingPage"
             android:exported="false" />
         <activity

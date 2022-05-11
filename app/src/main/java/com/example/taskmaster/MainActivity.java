@@ -2,6 +2,8 @@ package com.example.taskmaster;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -15,6 +17,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -61,6 +66,25 @@ public class MainActivity extends AppCompatActivity {
         task3.setOnClickListener(view -> {
             navigateToTaskDetails(task3.getId());
         });
+//        ArrayList<Task> taskData = new ArrayList<>();
+//        taskData.add(new Task("Reading","Read Your Book",State.PROGRESS));
+//        taskData.add(new Task("Codee","Take Your Break and breath",State.COMPLETE));
+//
+//        // get the Recycler view
+//        RecyclerView allTaskRecyclerView = findViewById(R.id.recycler_view);
+//
+//        // set a layout manager
+//        allTaskRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+//
+//        // set the adapter for this recycler view
+//        allTaskRecyclerView.setAdapter(new TaskAdapter(taskData));
+
+        Button addBtn = findViewById(R.id.add_task);
+        addBtn.setOnClickListener((v)->{
+            Intent intent = new Intent(MainActivity.this,SecondActivity.class);
+            startActivity(intent);
+        });
+
     }
 
 
@@ -120,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+//    private String[]  citties ={"",""};
 
     private void navigateToTaskDetails(int taskId) {
         Intent taskDetailsIntent = new Intent(this, TaskDetails.class);

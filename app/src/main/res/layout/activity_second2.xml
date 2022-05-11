@@ -13,13 +13,11 @@
         android:id="@+id/add_task_2"
         android:layout_width="132dp"
         android:layout_height="60dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginTop="53dp"
-        android:layout_marginBottom="46dp"
+        android:layout_marginStart="136dp"
+        android:layout_marginBottom="20dp"
         android:text="ADD TASK"
         app:layout_constraintBottom_toTopOf="@+id/total_tasks"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/description_task" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textView"
@@ -37,8 +35,8 @@
         android:id="@+id/total_tasks"
         android:layout_width="100dp"
         android:layout_height="43dp"
-        android:layout_marginStart="85dp"
-        android:layout_marginBottom="194dp"
+        android:layout_marginStart="152dp"
+        android:layout_marginBottom="52dp"
         android:text="total Tasks: 0"
         android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -56,6 +54,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/input_title" />
 
+
+    <TextView
+        android:id="@+id/task_state"
+        android:layout_width="99dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="24dp"
+        android:text="Task state"
+        android:textSize="10dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/description_task" />
+
     <com.google.android.material.textfield.TextInputEditText
         android:id="@+id/description_task"
         android:layout_width="336dp"
@@ -65,6 +76,17 @@
         android:hint="Describe your task"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/task_desc" />
+
+    <Spinner
+        android:id="@+id/state_of_task"
+        android:layout_width="245dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="20dp"
+        android:hint="Choose your state"
+        android:entries="@array/state"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/task_state" />
 
     <TextView
         android:id="@+id/task_title"
