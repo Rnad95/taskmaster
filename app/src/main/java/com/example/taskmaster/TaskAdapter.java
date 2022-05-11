@@ -40,13 +40,6 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
         }
 
-//        public TaskViewHolder(@NonNull View itemView) {
-//            super(itemView);
-//            this.itemView = itemView;
-//            itemView.setOnClickListener(this);
-//
-//        }
-
 
         @Override
         public void onClick(View view) {
