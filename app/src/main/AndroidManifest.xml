@@ -19,13 +19,13 @@
             android:name=".TaskDetails"
             android:exported="false" />
         <activity
-            android:name=".ThirdActivity"
+            android:name=".AllTasks"
             android:exported="false" />
         <activity
-            android:name=".SecondActivity"
+            android:name=".AddTask"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".HomePage"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

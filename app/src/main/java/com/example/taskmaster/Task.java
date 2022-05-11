@@ -51,10 +51,6 @@ public class Task implements Serializable {
         return body;
     }
 
-//    public String getState() {
-//        return state.toString();
-//    }
-
     public State getState() {
         return state;
     }

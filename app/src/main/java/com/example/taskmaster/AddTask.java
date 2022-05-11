@@ -13,14 +13,14 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.List;
 
-public class SecondActivity extends AppCompatActivity {
+public class AddTask extends AppCompatActivity {
     private List<String> tasks;
 
     private final View.OnClickListener mClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
 
-            Intent startThirdActivityIntent = new Intent(getApplicationContext(), ThirdActivity.class);
+            Intent startThirdActivityIntent = new Intent(getApplicationContext(), AllTasks.class);
 //            startThirdActivityIntent.putExtra("PassingTest","Test test test");
             startActivity(startThirdActivityIntent);
 
@@ -46,15 +46,6 @@ public class SecondActivity extends AppCompatActivity {
                 String taskBody = taskBodyField.getText().toString();
                 String taskState = taskStateField.getSelectedItem().toString();
                 Task task = new Task(taskTitle,taskBody,taskState);
-//                if(taskState.toUpperCase().equals( State.PROGRESS))
-//                     task =new Task(taskTitle,taskBody,State.PROGRESS);
-//                else if (taskState.toUpperCase().equals( State.COMPLETE))
-//                     task =new Task(taskTitle,taskBody,State.COMPLETE);
-//                else if(taskState.toUpperCase().equals( State.ASSIGNED))
-//                    task =new Task(taskTitle,taskBody,State.ASSIGNED);
-//                else
-//                    task =new Task(taskTitle,taskBody,State.NEW);
-
 
                 Long newTaskId = AppDatabase.getInstance(getApplicationContext()).taskDao().insertTask(task);
 
@@ -62,7 +53,7 @@ public class SecondActivity extends AppCompatActivity {
                 List<Task> allTasks=  AppDatabase.getInstance(getApplicationContext()).taskDao().getAll();
 
 
-                Intent intent = new Intent(getApplicationContext(),ThirdActivity.class);
+                Intent intent = new Intent(getApplicationContext(), AllTasks.class);
                 intent.putExtra("PassingTask",task);
                 setResult(RESULT_OK,intent);
                 finish();

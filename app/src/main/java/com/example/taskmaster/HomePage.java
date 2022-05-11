@@ -14,22 +14,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
-    private static final String TAG = MainActivity.class.getSimpleName();
+public class HomePage extends AppCompatActivity {
+    private static final String TAG = HomePage.class.getSimpleName();
     private TextView mUsernameText;
 
+    ArrayList<Task> allTasks;
 
     private final View.OnClickListener mClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Intent startSecondActivityIntent = new Intent(getApplicationContext(), SecondActivity.class);
+            Intent startSecondActivityIntent = new Intent(getApplicationContext(), AddTask.class);
             startActivity(startSecondActivityIntent);
         }
     };
@@ -37,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private final View.OnClickListener mClickListener2 = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            Intent startThirdActivityIntent = new Intent(getApplicationContext(), ThirdActivity.class);
+            Intent startThirdActivityIntent = new Intent(getApplicationContext(), AllTasks.class);
             startActivity(startThirdActivityIntent);
         }
     };
@@ -52,41 +51,40 @@ public class MainActivity extends AppCompatActivity {
         mAddTaskButton.setOnClickListener(mClickListener);
         mAllTaskButton.setOnClickListener(mClickListener2);
         mUsernameText = findViewById(R.id.txt_username);
+//
+        // get the Recycler view
+        RecyclerView allTaskRecyclerView = findViewById(R.id.show_recycler_view);
 
-        Button task1 = findViewById(R.id.android_task);
-        Button task2 = findViewById(R.id.coffee_task);
-        Button task3 = findViewById(R.id.design_task);
+        // set a layout manager
+        allTaskRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        task1.setOnClickListener(view -> {
-            navigateToTaskDetails(task1.getId());
-        });
-        task2.setOnClickListener(view -> {
-            navigateToTaskDetails(task2.getId());
-        });
-        task3.setOnClickListener(view -> {
-            navigateToTaskDetails(task3.getId());
-        });
-//        ArrayList<Task> taskData = new ArrayList<>();
-//        taskData.add(new Task("Reading","Read Your Book",State.PROGRESS));
-//        taskData.add(new Task("Codee","Take Your Break and breath",State.COMPLETE));
-//
-//        // get the Recycler view
-//        RecyclerView allTaskRecyclerView = findViewById(R.id.recycler_view);
-//
-//        // set a layout manager
-//        allTaskRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-//
-//        // set the adapter for this recycler view
+        // set the adapter for this recycler view
 //        allTaskRecyclerView.setAdapter(new TaskAdapter(taskData));
+
+        Bundle bundle = getIntent().getExtras();
+        Task task  = (Task) getIntent().getSerializableExtra("PassingTask");
+        allTasks= (ArrayList<Task>) AppDatabase.getInstance(getApplicationContext()).taskDao().getAll();
+        allTaskRecyclerView.setAdapter(new TaskAdapter(allTasks,this::onTaskListener));
 
         Button addBtn = findViewById(R.id.add_task);
         addBtn.setOnClickListener((v)->{
-            Intent intent = new Intent(MainActivity.this,SecondActivity.class);
+            Intent intent = new Intent(HomePage.this, AddTask.class);
             startActivity(intent);
         });
 
     }
 
+
+//    @Override
+    public void onTaskListener(int position) {
+        Intent intent = new Intent(getApplicationContext(), TaskDetails.class);
+        System.out.println("***************** POSITION ==>"+ position);
+        intent.putExtra("SpecificData",allTasks.get(position).getTitle());
+        intent.putExtra("stateData",allTasks.get(position).getState().toString());
+        intent.putExtra("bodyData",allTasks.get(position).getBody());
+
+        startActivity(intent);
+    }
 
     @Override
     protected void onStart() {
@@ -144,21 +142,10 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-//    private String[]  citties ={"",""};
 
     private void navigateToTaskDetails(int taskId) {
         Intent taskDetailsIntent = new Intent(this, TaskDetails.class);
-        switch (taskId) {
-            case R.id.android_task:
-                taskDetailsIntent.putExtra("PassingTest", "Android Task");
-                break;
-            case R.id.coffee_task:
-                taskDetailsIntent.putExtra("PassingTest", "Coffee Task");
-                break;
-            case R.id.design_task:
-                taskDetailsIntent.putExtra("PassingTest", "Design Task");
-                break;
-        }
+
         startActivity(taskDetailsIntent);
     }
 
