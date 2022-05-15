@@ -13,6 +13,7 @@ We create three activity: one for the main page to show image with two buttuon o
 - Activity to show all of the tasks
 ![image three](https://i.ibb.co/wsGBywy/photo1650898777.jpg)
 
+
 ## Lab - 27
 
 - The following function is handled:
@@ -55,3 +56,4 @@ Check the Important UI Element and the navigation from the HomePage to Task Deta
 ![GIT UI](screenshots/Lab31/UiTest.gif)
 
 ![Result of UI test](screenshots/Lab31/resultOfTestingUI.png)
+
