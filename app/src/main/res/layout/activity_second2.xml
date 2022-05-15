@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/add_task_activity"
     tools:context=".AddTask"
     tools:layout_editor_absoluteX="-2dp"
     tools:layout_editor_absoluteY="-26dp">
@@ -20,7 +21,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/logo_name"
         android:layout_width="107dp"
         android:layout_height="40dp"
         android:layout_marginStart="152dp"

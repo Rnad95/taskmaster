@@ -39,3 +39,21 @@ The database saved the new task with the state of this task and the description.
 ![All of the Tasks](screenshots/Lab-29/tasks.jpeg)
 ![details of the Task](screenshots/Lab-29/details.jpeg)
 
+## Lab - 31
+
+Espresso Testing Unit was added 
+
+Editing UserName is showed below:
+
+![video of Testing](screenshots/Lab31/SettingTest.gif)
+
+![Result of Testing On IntelliJ](screenshots/Lab31/ResultOftestSetting.png)
+
+Check the Important UI Element and the navigation from the HomePage to Task Details
+
+![navigateTest](screenshots/Lab31/navigationTest.gif)
+
+![GIT UI](screenshots/Lab31/UiTest.gif)
+
+![Result of UI test](screenshots/Lab31/resultOfTestingUI.png)
+

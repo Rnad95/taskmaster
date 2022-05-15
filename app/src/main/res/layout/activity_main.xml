@@ -2,9 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomePage"
+    tools:context=".MainActivity"
     tools:layout_editor_absoluteX="92dp"
     tools:layout_editor_absoluteY="-119dp">
 
@@ -63,7 +64,7 @@
 <!--        app:layout_constraintTop_toTopOf="parent" />-->
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/logo_name"
         android:layout_width="174dp"
         android:layout_height="62dp"
         android:layout_marginTop="88dp"
@@ -82,7 +83,7 @@
         android:layout_height="140dp"
         android:layout_marginTop="52dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintStart_toEndOf="@+id/logo_name"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/logo" />
 
