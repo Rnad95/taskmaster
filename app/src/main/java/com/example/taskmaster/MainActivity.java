@@ -19,8 +19,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class HomePage extends AppCompatActivity {
-    private static final String TAG = HomePage.class.getSimpleName();
+public class MainActivity extends AppCompatActivity {
+    private static final String TAG = MainActivity.class.getSimpleName();
     private TextView mUsernameText;
 
     ArrayList<Task> allTasks;
@@ -68,7 +68,7 @@ public class HomePage extends AppCompatActivity {
 
         Button addBtn = findViewById(R.id.add_task);
         addBtn.setOnClickListener((v)->{
-            Intent intent = new Intent(HomePage.this, AddTask.class);
+            Intent intent = new Intent(MainActivity.this, AddTask.class);
             startActivity(intent);
         });
 

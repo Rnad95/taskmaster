@@ -21,7 +21,7 @@ public class AllTasks extends AppCompatActivity implements TaskAdapter.OnTaskLis
         RecyclerView allTaskRecyclerView = findViewById(R.id.show_recycler_view);
         Button back = findViewById(R.id.back);
         back.setOnClickListener(view -> {
-            Intent intent = new Intent(this, HomePage.class);
+            Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
         });
 

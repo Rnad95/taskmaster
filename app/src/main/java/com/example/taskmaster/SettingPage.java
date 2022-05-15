@@ -3,6 +3,7 @@ package com.example.taskmaster;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -77,7 +78,8 @@ public class SettingPage extends AppCompatActivity {
         SharedPreferences.Editor preferenceEditor = sharedPreferences.edit();
         preferenceEditor.putString(USERNAME, "@"+username);
         preferenceEditor.apply();
-
+        Intent intent = new Intent();
+        intent.putExtra("Username",username);
         Toast.makeText(this, "username Saved", Toast.LENGTH_SHORT).show();
     }
 

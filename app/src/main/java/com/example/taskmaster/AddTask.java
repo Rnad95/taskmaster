@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -15,6 +16,7 @@ import java.util.List;
 
 public class AddTask extends AppCompatActivity {
     private List<String> tasks;
+//    private int count;
 
     private final View.OnClickListener mClickListener = new View.OnClickListener() {
         @Override
@@ -40,7 +42,8 @@ public class AddTask extends AppCompatActivity {
             public void onClick(View view) {
                 EditText taskTitleField = findViewById(R.id.input_title);
                 EditText taskBodyField = findViewById(R.id.description_task);
-//                EditText taskStateField = findViewById(R.id.state_of_task);
+//                TextView totalNumberOfTasks = findViewById(R.id.total_tasks);
+
                 Spinner taskStateField = findViewById(R.id.state_of_task);
                 String taskTitle = taskTitleField.getText().toString();
                 String taskBody = taskBodyField.getText().toString();
