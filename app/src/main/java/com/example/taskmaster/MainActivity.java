@@ -16,14 +16,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.amplifyframework.datastore.generated.model.Task;
 
+
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
     private TextView mUsernameText;
 
-    ArrayList<Task> allTasks;
+    List<com.example.taskmaster.Task> allTasks;
 
     private final View.OnClickListener mClickListener = new View.OnClickListener() {
         @Override
@@ -44,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_main);
         Button mAddTaskButton = findViewById(R.id.add_task);
         Button mAllTaskButton = findViewById(R.id.all_task);
@@ -51,20 +56,23 @@ public class MainActivity extends AppCompatActivity {
         mAddTaskButton.setOnClickListener(mClickListener);
         mAllTaskButton.setOnClickListener(mClickListener2);
         mUsernameText = findViewById(R.id.txt_username);
-//
-        // get the Recycler view
+
+//        // get the Recycler view
         RecyclerView allTaskRecyclerView = findViewById(R.id.show_recycler_view);
 
         // set a layout manager
         allTaskRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         // set the adapter for this recycler view
-//        allTaskRecyclerView.setAdapter(new TaskAdapter(taskData));
-
         Bundle bundle = getIntent().getExtras();
-        Task task  = (Task) getIntent().getSerializableExtra("PassingTask");
-        allTasks= (ArrayList<Task>) AppDatabase.getInstance(getApplicationContext()).taskDao().getAll();
-        allTaskRecyclerView.setAdapter(new TaskAdapter(allTasks,this::onTaskListener));
+
+//        Task task  =  getIntent().getSerializableExtra("PassingTask");
+        Serializable task = getIntent().getSerializableExtra("PassingTask");
+//        allTasks= AppDatabase.getInstance(getApplicationContext()).taskDao().getAll();
+//        allTaskRecyclerView.setAdapter(new TaskAdapter(allTasks,this::onTaskListener));
+
+
+
 
         Button addBtn = findViewById(R.id.add_task);
         addBtn.setOnClickListener((v)->{
@@ -80,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(getApplicationContext(), TaskDetails.class);
         System.out.println("***************** POSITION ==>"+ position);
         intent.putExtra("SpecificData",allTasks.get(position).getTitle());
-        intent.putExtra("stateData",allTasks.get(position).getState().toString());
+        intent.putExtra("stateData",allTasks.get(position).getState());
         intent.putExtra("bodyData",allTasks.get(position).getBody());
 
         startActivity(intent);

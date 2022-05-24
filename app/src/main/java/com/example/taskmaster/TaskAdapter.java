@@ -20,7 +20,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
 
     }
 
-    public  TaskAdapter (ArrayList<Task> allTaskData, OnTaskListner mOnTaskListner){
+    public  TaskAdapter (List<Task> allTaskData, OnTaskListner mOnTaskListner){
         this.allTaskData = allTaskData;
         this.mOnTaskListener = mOnTaskListner;
 
