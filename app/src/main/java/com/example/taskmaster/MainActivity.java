@@ -8,6 +8,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.Message;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.Menu;
@@ -16,6 +19,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.amplifyframework.AmplifyException;
+import com.amplifyframework.api.aws.AWSApiPlugin;
+import com.amplifyframework.api.graphql.model.ModelQuery;
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.AWSDataStorePlugin;
 import com.amplifyframework.datastore.generated.model.Task;
 
 
@@ -26,8 +35,10 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = MainActivity.class.getSimpleName();
     private TextView mUsernameText;
-
-    List<com.example.taskmaster.Task> allTasks;
+    Handler handler;
+    TaskAdapter adapter;
+    RecyclerView allTaskRecyclerView;
+    List<Task> allTasks;
 
     private final View.OnClickListener mClickListener = new View.OnClickListener() {
         @Override
@@ -48,8 +59,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_main);
+
         Button mAddTaskButton = findViewById(R.id.add_task);
         Button mAllTaskButton = findViewById(R.id.all_task);
 
@@ -57,21 +68,33 @@ public class MainActivity extends AppCompatActivity {
         mAllTaskButton.setOnClickListener(mClickListener2);
         mUsernameText = findViewById(R.id.txt_username);
 
-//        // get the Recycler view
-        RecyclerView allTaskRecyclerView = findViewById(R.id.show_recycler_view);
 
-        // set a layout manager
+        try {
+            Amplify.addPlugin(new AWSApiPlugin());
+            Amplify.addPlugin(new AWSDataStorePlugin());
+            Amplify.configure(getApplicationContext());
+
+            Log.i(TAG, "Initialized Amplify");
+        } catch (AmplifyException e) {
+            Log.e(TAG, "Could not initialize Amplify", e);
+        }
+
+         handler = new Handler(Looper.getMainLooper(), msg -> {
+         allTaskRecyclerView = findViewById(R.id.show_recycler_view);
         allTaskRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        // set the adapter for this recycler view
-        Bundle bundle = getIntent().getExtras();
+             adapter = new TaskAdapter(
+                    allTasks, position -> {
+                Intent intent = new Intent(getApplicationContext(), TaskDetails.class);
+                 intent.putExtra("SpecificData",allTasks.get(position).getTitle());
+                 intent.putExtra("stateData",allTasks.get(position).getStatus());
+                 intent.putExtra("bodyData",allTasks.get(position).getDescription());
+                startActivity(intent);
+            });
+             allTaskRecyclerView.setAdapter(adapter);
 
-//        Task task  =  getIntent().getSerializableExtra("PassingTask");
-        Serializable task = getIntent().getSerializableExtra("PassingTask");
-//        allTasks= AppDatabase.getInstance(getApplicationContext()).taskDao().getAll();
-//        allTaskRecyclerView.setAdapter(new TaskAdapter(allTasks,this::onTaskListener));
-
-
+            return true;
+        });
 
 
         Button addBtn = findViewById(R.id.add_task);
@@ -83,13 +106,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-//    @Override
+    //    @Override
     public void onTaskListener(int position) {
         Intent intent = new Intent(getApplicationContext(), TaskDetails.class);
         System.out.println("***************** POSITION ==>"+ position);
         intent.putExtra("SpecificData",allTasks.get(position).getTitle());
-        intent.putExtra("stateData",allTasks.get(position).getState());
-        intent.putExtra("bodyData",allTasks.get(position).getBody());
+        intent.putExtra("stateData",allTasks.get(position).getStatus());
+        intent.putExtra("bodyData",allTasks.get(position).getDescription());
 
         startActivity(intent);
     }
@@ -110,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         setAddress();
+        getTasks();
 
     }
 
@@ -165,6 +189,37 @@ public class MainActivity extends AppCompatActivity {
     private void setAddress() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         mUsernameText.setText(sharedPreferences.getString(SettingPage.USERNAME, "Username Doesn't Define"));
+    }
+
+    private void getTasks() {
+            Amplify.API.query(
+                    ModelQuery.list(Task.class),
+                    success -> {
+                        allTasks = new ArrayList<>();
+
+                        if (success.hasData()) {
+                            for (Task task : success.getData()) {
+                                allTasks.add(task);
+                            }
+                        }
+                        Log.i(TAG, "Tasks => " + allTasks);
+                        // Send message to the handler to show the Tasks List in the Recycler View >>
+                        Bundle bundle = new Bundle();
+                        bundle.putString("tasksList", success.toString());
+
+                        Message message = new Message();
+                        message.setData(bundle);
+
+                        handler.sendMessage(message);
+
+                    runOnUiThread(() -> {
+                        allTaskRecyclerView.setAdapter(adapter);
+                    });
+                    },
+                    error -> Log.e(TAG, error.toString(), error)
+            );
+
+
     }
 
 }

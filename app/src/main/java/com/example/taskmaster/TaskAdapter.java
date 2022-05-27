@@ -1,5 +1,7 @@
 package com.example.taskmaster;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,18 +10,29 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.amplifyframework.datastore.generated.model.Task;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder> {
     List<Task> allTaskData = new ArrayList<>();
     private  OnTaskListner mOnTaskListener;
+    Context context;
 
     public  TaskAdapter (ArrayList<Task> allTaskData){
         this.allTaskData = allTaskData;
 
     }
 
+    public void setAllTaskData(List<Task> allTaskData) {
+        this.allTaskData = allTaskData;
+    }
+
+    public  TaskAdapter (ArrayList<Task> allTaskData, Context context){
+        this.allTaskData = allTaskData;
+        this.context = context;
+
+    }
     public  TaskAdapter (List<Task> allTaskData, OnTaskListner mOnTaskListner){
         this.allTaskData = allTaskData;
         this.mOnTaskListener = mOnTaskListner;
@@ -64,8 +77,10 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
         TextView state = holder.itemView.findViewById(R.id.state_frag);
 
         title.setText(holder.task.getTitle());
-        body.setText(holder.task.getBody());
-        state.setText(holder.task.getState().toString());
+        body.setText(holder.task.getDescription());
+        state.setText(holder.task.getStatus().toString());
+
+        View taskViewHolder = holder.itemView;
 
     }
 
@@ -73,6 +88,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.TaskViewHolder
     public int getItemCount() {
         return allTaskData.size();
     }
+
 
 
     public interface OnTaskListner {

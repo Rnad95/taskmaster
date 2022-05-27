@@ -1,4 +1,56 @@
 # this is an auto generated file. This will be overwritten
+query GetTask($id: ID!) {
+  getTask(id: $id) {
+    id
+    title
+    description
+    status
+    teams {
+      items {
+        id
+        name
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        taskTeamsId
+      }
+      nextToken
+      startedAt
+    }
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+query ListTasks(
+  $filter: ModelTaskFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listTasks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      title
+      description
+      status
+      teams {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+    nextToken
+    startedAt
+  }
+}
 query SyncTasks(
   $filter: ModelTaskFilterInput
   $limit: Int
@@ -16,45 +68,103 @@ query SyncTasks(
       title
       description
       status
+      teams {
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
       _version
       _deleted
       _lastChangedAt
-      createdAt
-      updatedAt
     }
     nextToken
     startedAt
   }
 }
-query GetTask($id: ID!) {
-  getTask(id: $id) {
+query GetTeam($id: ID!) {
+  getTeam(id: $id) {
     id
-    title
-    description
-    status
+    name
+    createdAt
+    updatedAt
     _version
     _deleted
     _lastChangedAt
-    createdAt
-    updatedAt
+    taskTeamsId
   }
 }
-query ListTasks(
-  $filter: ModelTaskFilterInput
+query ListTeams(
+  $filter: ModelTeamFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  listTasks(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listTeams(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      title
-      description
-      status
+      name
+      createdAt
+      updatedAt
       _version
       _deleted
       _lastChangedAt
+      taskTeamsId
+    }
+    nextToken
+    startedAt
+  }
+}
+query SyncTeams(
+  $filter: ModelTeamFilterInput
+  $limit: Int
+  $nextToken: String
+  $lastSync: AWSTimestamp
+) {
+  syncTeams(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    lastSync: $lastSync
+  ) {
+    items {
+      id
+      name
       createdAt
       updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+      taskTeamsId
+    }
+    nextToken
+    startedAt
+  }
+}
+query GetNote($id: ID!) {
+  getNote(id: $id) {
+    id
+    content
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+  }
+}
+query ListNotes(
+  $filter: ModelNoteFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listNotes(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      content
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
     nextToken
     startedAt
@@ -75,41 +185,47 @@ query SyncNotes(
     items {
       id
       content
+      createdAt
+      updatedAt
       _version
       _deleted
       _lastChangedAt
-      createdAt
-      updatedAt
     }
     nextToken
     startedAt
   }
 }
-query GetNote($id: ID!) {
-  getNote(id: $id) {
+query GetUser($id: ID!) {
+  getUser(id: $id) {
+    registerationNumber
+    name
+    age
+    number
     id
-    content
+    createdAt
+    updatedAt
     _version
     _deleted
     _lastChangedAt
-    createdAt
-    updatedAt
   }
 }
-query ListNotes(
-  $filter: ModelNoteFilterInput
+query ListUsers(
+  $filter: ModelUserFilterInput
   $limit: Int
   $nextToken: String
 ) {
-  listNotes(filter: $filter, limit: $limit, nextToken: $nextToken) {
+  listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
+      registerationNumber
+      name
+      age
+      number
       id
-      content
+      createdAt
+      updatedAt
       _version
       _deleted
       _lastChangedAt
-      createdAt
-      updatedAt
     }
     nextToken
     startedAt
@@ -128,52 +244,16 @@ query SyncUsers(
     lastSync: $lastSync
   ) {
     items {
-      id
       registerationNumber
       name
       age
       number
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
-    }
-    nextToken
-    startedAt
-  }
-}
-query GetUser($id: ID!) {
-  getUser(id: $id) {
-    id
-    registerationNumber
-    name
-    age
-    number
-    _version
-    _deleted
-    _lastChangedAt
-    createdAt
-    updatedAt
-  }
-}
-query ListUsers(
-  $filter: ModelUserFilterInput
-  $limit: Int
-  $nextToken: String
-) {
-  listUsers(filter: $filter, limit: $limit, nextToken: $nextToken) {
-    items {
       id
-      registerationNumber
-      name
-      age
-      number
+      createdAt
+      updatedAt
       _version
       _deleted
       _lastChangedAt
-      createdAt
-      updatedAt
     }
     nextToken
     startedAt

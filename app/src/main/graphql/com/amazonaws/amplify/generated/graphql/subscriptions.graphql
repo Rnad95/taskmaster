@@ -5,11 +5,25 @@ subscription OnCreateTask {
     title
     description
     status
+    teams {
+      items {
+        id
+        name
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        taskTeamsId
+      }
+      nextToken
+      startedAt
+    }
+    createdAt
+    updatedAt
     _version
     _deleted
     _lastChangedAt
-    createdAt
-    updatedAt
   }
 }
 subscription OnUpdateTask {
@@ -18,11 +32,25 @@ subscription OnUpdateTask {
     title
     description
     status
+    teams {
+      items {
+        id
+        name
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        taskTeamsId
+      }
+      nextToken
+      startedAt
+    }
+    createdAt
+    updatedAt
     _version
     _deleted
     _lastChangedAt
-    createdAt
-    updatedAt
   }
 }
 subscription OnDeleteTask {
@@ -31,85 +59,135 @@ subscription OnDeleteTask {
     title
     description
     status
+    teams {
+      items {
+        id
+        name
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        taskTeamsId
+      }
+      nextToken
+      startedAt
+    }
+    createdAt
+    updatedAt
     _version
     _deleted
     _lastChangedAt
+  }
+}
+subscription OnCreateTeam {
+  onCreateTeam {
+    id
+    name
     createdAt
     updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+    taskTeamsId
+  }
+}
+subscription OnUpdateTeam {
+  onUpdateTeam {
+    id
+    name
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+    taskTeamsId
+  }
+}
+subscription OnDeleteTeam {
+  onDeleteTeam {
+    id
+    name
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+    taskTeamsId
   }
 }
 subscription OnCreateNote {
   onCreateNote {
     id
     content
+    createdAt
+    updatedAt
     _version
     _deleted
     _lastChangedAt
-    createdAt
-    updatedAt
   }
 }
 subscription OnUpdateNote {
   onUpdateNote {
     id
     content
+    createdAt
+    updatedAt
     _version
     _deleted
     _lastChangedAt
-    createdAt
-    updatedAt
   }
 }
 subscription OnDeleteNote {
   onDeleteNote {
     id
     content
+    createdAt
+    updatedAt
     _version
     _deleted
     _lastChangedAt
-    createdAt
-    updatedAt
   }
 }
 subscription OnCreateUser {
   onCreateUser {
-    id
     registerationNumber
     name
     age
     number
+    id
+    createdAt
+    updatedAt
     _version
     _deleted
     _lastChangedAt
-    createdAt
-    updatedAt
   }
 }
 subscription OnUpdateUser {
   onUpdateUser {
-    id
     registerationNumber
     name
     age
     number
+    id
+    createdAt
+    updatedAt
     _version
     _deleted
     _lastChangedAt
-    createdAt
-    updatedAt
   }
 }
 subscription OnDeleteUser {
   onDeleteUser {
-    id
     registerationNumber
     name
     age
     number
+    id
+    createdAt
+    updatedAt
     _version
     _deleted
     _lastChangedAt
-    createdAt
-    updatedAt
   }
 }

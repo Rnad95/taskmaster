@@ -1,5 +1,6 @@
 package com.amplifyframework.datastore.generated.model;
 
+import com.amplifyframework.core.model.annotations.HasMany;
 
 import java.util.List;
 import java.util.UUID;
@@ -7,10 +8,7 @@ import java.util.Objects;
 
 import androidx.core.util.ObjectsCompat;
 
-import com.amplifyframework.core.model.AuthStrategy;
 import com.amplifyframework.core.model.Model;
-import com.amplifyframework.core.model.ModelOperation;
-import com.amplifyframework.core.model.annotations.AuthRule;
 import com.amplifyframework.core.model.annotations.Index;
 import com.amplifyframework.core.model.annotations.ModelConfig;
 import com.amplifyframework.core.model.annotations.ModelField;
@@ -20,9 +18,7 @@ import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 
 /** This is an auto generated class representing the Task type in your schema. */
 @SuppressWarnings("all")
-@ModelConfig(pluralName = "Tasks", authRules = {
-  @AuthRule(allow = AuthStrategy.PUBLIC, operations = { ModelOperation.CREATE, ModelOperation.UPDATE, ModelOperation.DELETE, ModelOperation.READ })
-})
+@ModelConfig(pluralName = "Tasks")
 public final class Task implements Model {
   public static final QueryField ID = field("Task", "id");
   public static final QueryField TITLE = field("Task", "title");
@@ -32,6 +28,7 @@ public final class Task implements Model {
   private final @ModelField(targetType="String", isRequired = true) String title;
   private final @ModelField(targetType="String") String description;
   private final @ModelField(targetType="String") String status;
+  private final @ModelField(targetType="Team") @HasMany(associatedWith = "taskTeamsId", type = Team.class) List<Team> teams = null;
   public String getId() {
       return id;
   }
@@ -48,7 +45,11 @@ public final class Task implements Model {
       return status;
   }
   
-  private Task(String id, String title, String description, String status) {
+  public List<Team> getTeams() {
+      return teams;
+  }
+  
+  public Task(String id, String title, String description, String status) {
     this.id = id;
     this.title = title;
     this.description = description;

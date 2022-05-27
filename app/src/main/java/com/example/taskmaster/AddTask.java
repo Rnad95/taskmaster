@@ -1,7 +1,5 @@
 package com.example.taskmaster;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,15 +7,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.aws.AWSApiPlugin;
 import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.AWSDataStorePlugin;
-import com.amplifyframework.datastore.generated.model.State;
 import com.amplifyframework.datastore.generated.model.Task;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -25,7 +22,7 @@ import java.util.List;
 
 public class AddTask extends AppCompatActivity {
     public static final String TAG = AddTask.class.getSimpleName();
-//    private List<Task> allTasks;
+    private List<Task> allTasks;
 
     private final View.OnClickListener mClickListener = new View.OnClickListener() {
         @Override
@@ -41,11 +38,9 @@ public class AddTask extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second2);
-
         Button mAddTaskButton2 = findViewById(R.id.add_task_2);
         EditText mInputTheTitle=findViewById(R.id.input_title);
         TextInputEditText mInputTheDescription=findViewById(R.id.description_task);
-
         mAddTaskButton2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -54,6 +49,8 @@ public class AddTask extends AppCompatActivity {
                 configureAmplify();
 
                 Spinner taskStateField = findViewById(R.id.state_of_task);
+//                Spinner taskTeamField = findViewById(R.id.team_of_task);
+
                 String taskTitle = taskTitleField.getText().toString();
                 String taskBody = taskBodyField.getText().toString();
                 String taskState =  taskStateField.getSelectedItem().toString();
@@ -65,27 +62,43 @@ public class AddTask extends AppCompatActivity {
                         .status(taskState)
                         .build();
 
-//                Task task = new Task(taskTitle,taskBody,taskState);
 
-//                Long newTaskId = AppDatabase.getInstance(getApplicationContext()).taskDao().insertTask(task);
+                Amplify.API.query(ModelMutation.create(task),
+                        success-> Log.i(TAG, ""),
+                        error -> Log.e(TAG,"Error",error)
+                );
 
-                System.out.println("******************** Task Title = " + task.getTitle() + " ************************");
-//                List<Task> allTasks=  AppDatabase.getInstance(getApplicationContext()).taskDao().getAll();
-//                allTasks.add(task);
+                Amplify.DataStore.save(task,
+                        success -> Log.i(TAG, "Saved item save: " + success.item().getTitle()),
+                        error -> Log.e(TAG, "Could not save item to DataStore", error)
+                );
 
 
-                Amplify.API.mutate(ModelMutation.create(task),
-                        success -> Log.i(TAG,"Saved item: "+ success.getData().getTitle()),
-                        error -> Log.e(TAG,"Could not save to API" + error)
-                        );
+                Amplify.DataStore.observe(Task.class,
+                        started -> {
+                            Log.i(TAG, "Observation began.");
+                            // TODO: 5/17/22 Update the UI thread with in this call method
+                            // Manipulate your views
+
+                            // call handler
+                        },
+                        change -> Log.i(TAG, change.item().toString()),
+                        failure -> Log.e(TAG, "Observation failed.", failure),
+                        () -> Log.i(TAG, "Observation complete.")
+                );
+
+
+                com.example.taskmaster.Task taskMaster = new com.example.taskmaster.Task(task.getTitle(),task.getDescription(),task.getStatus());
+                Long newTaskId = AppDatabase.getInstance(getApplicationContext()).taskDao().insertTask(taskMaster);
+
+                System.out.println("******************** Task ID = " + newTaskId + " ************************");
+                List<com.example.taskmaster.Task> allTasks=  AppDatabase.getInstance(getApplicationContext()).taskDao().getAll();
+
 
                 Intent intent = new Intent(getApplicationContext(), AllTasks.class);
-                Log.i(TAG,"TASK "+ task);
-
-                intent.putExtra("PassingTask", String.valueOf(task));
+                intent.putExtra("PassingTask", task.toString());
                 setResult(RESULT_OK,intent);
                 finish();
-
             }
         });
 
