@@ -50,15 +50,7 @@ public class EspressoUITest {
         onView(withId(R.id.add_task_activity)).check(matches(isDisplayed()));
 
     }
-
-//    Navigate to DetailsTask Activity
-    @Test
-    public void test_navToTaskDetails(){
-        onView(withId(R.id.show_recycler_view)).perform(click());
-        onView(withId(R.id.task_details_activity)).check(matches(isDisplayed()));
-
-    }
-
+    
 
 
 }
