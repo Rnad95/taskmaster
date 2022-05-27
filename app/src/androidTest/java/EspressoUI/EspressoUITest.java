@@ -50,7 +50,7 @@ public class EspressoUITest {
         onView(withId(R.id.add_task_activity)).check(matches(isDisplayed()));
 
     }
-    
+
 
 
 }

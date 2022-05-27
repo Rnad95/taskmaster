@@ -16,6 +16,7 @@ We create three activity: one for the main page to show image with two buttuon o
 
 ## Lab - 27
 
+---
 - The following function is handled:
 
 1. Setting Page: to add a username and save it using sharedPreferences.
@@ -32,6 +33,8 @@ We create three activity: one for the main page to show image with two buttuon o
 
 ## Lab - 29
 
+----
+
 The database saved the new task with the state of this task and the description.
 
 ![edit main Page](screenshots/Lab-29/mainPage.jpeg)
@@ -41,6 +44,7 @@ The database saved the new task with the state of this task and the description.
 
 ## Lab - 31
 
+---
 Espresso Testing Unit was added 
 
 Editing UserName is showed below:
@@ -57,3 +61,22 @@ Check the Important UI Element and the navigation from the HomePage to Task Deta
 
 ![Result of UI test](screenshots/Lab31/resultOfTestingUI.png)
 
+## Lab - 32
+
+---
+
+1. Amplify added to application
+2. Amplify client created in Application class
+3. Data is posted and displayed based on DynamoDB status, not local DB status
+
+**HomePage:**
+
+![home](screenshots/Lab32/HomePage.jpeg)
+
+**All Tasks:**
+
+![allTasks](screenshots/Lab32/allTasks.jpeg)
+
+**TaskDetails:**
+
+![TaskDetails](screenshots/Lab32/taskDetails.jpeg)
