@@ -1,0 +1,27 @@
+#input AMPLIFY { globalAuthRule: AuthRule = { allow: public } }
+
+type Task @model @auth(rules: [{ allow: public}])  {
+  id: ID!
+  title: String!
+  description: String
+  status: String
+#  teams: [Team] @hasMany(keyName: "byTeam", fields: ["id"])
+}
+
+type Team  @model @auth(rules: [{ allow: public}]){
+#@key(name: "byTeam", fields: ["TaskID", "content"]){
+  id: ID!
+  name: String
+}
+
+type Note @model @auth(rules: [{ allow: public}]) {
+  id: ID!
+  content: String!
+}
+
+type User @model @auth(rules: [{ allow: public}])  {
+  registerationNumber: ID!
+  name: String!
+  age: Int
+  number: String
+}

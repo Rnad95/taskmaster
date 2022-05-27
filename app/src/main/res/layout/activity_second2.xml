@@ -10,6 +10,17 @@
     tools:layout_editor_absoluteY="-26dp">
 
 
+    <Spinner
+        android:id="@+id/state_of_task"
+        android:layout_width="245dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="28dp"
+        android:entries="@array/state"
+        android:hint="Choose your state"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/task_state" />
+
     <Button
         android:id="@+id/add_task_2"
         android:layout_width="132dp"
@@ -36,8 +47,8 @@
         android:id="@+id/total_tasks"
         android:layout_width="100dp"
         android:layout_height="43dp"
-        android:layout_marginStart="152dp"
-        android:layout_marginBottom="52dp"
+        android:layout_marginStart="148dp"
+        android:layout_marginBottom="16dp"
         android:text="total Tasks: 0"
         android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -79,15 +90,15 @@
         app:layout_constraintTop_toBottomOf="@+id/task_desc" />
 
     <Spinner
-        android:id="@+id/state_of_task"
+        android:id="@+id/team_of_task"
         android:layout_width="245dp"
         android:layout_height="43dp"
         android:layout_marginStart="80dp"
-        android:layout_marginTop="20dp"
-        android:hint="Choose your state"
-        android:entries="@array/state"
+        android:layout_marginTop="32dp"
+        android:entries="@array/team"
+        android:hint="Choose the team of this Task"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/task_state" />
+        app:layout_constraintTop_toBottomOf="@+id/state_of_task" />
 
     <TextView
         android:id="@+id/task_title"
