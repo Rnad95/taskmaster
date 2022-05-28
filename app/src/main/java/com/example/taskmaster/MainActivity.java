@@ -192,18 +192,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void getTasks() {
-            Amplify.API.query(
-                    ModelQuery.list(Task.class),
+            Amplify.DataStore.query(
+                 Task.class,
                     success -> {
                         allTasks = new ArrayList<>();
 
-                        if (success.hasData()) {
-                            for (Task task : success.getData()) {
+                        while (success.hasNext()) {
+                            Task task = success.next();
                                 allTasks.add(task);
-                            }
                         }
                         Log.i(TAG, "Tasks => " + allTasks);
-                        // Send message to the handler to show the Tasks List in the Recycler View >>
                         Bundle bundle = new Bundle();
                         bundle.putString("tasksList", success.toString());
 
@@ -216,7 +214,7 @@ public class MainActivity extends AppCompatActivity {
                         allTaskRecyclerView.setAdapter(adapter);
                     });
                     },
-                    error -> Log.e(TAG, error.toString(), error)
+                    error -> Log.e(TAG, "Error "+error.toString(), error)
             );
 
 

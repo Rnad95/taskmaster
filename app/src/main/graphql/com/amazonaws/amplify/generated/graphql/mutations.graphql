@@ -8,25 +8,12 @@ mutation CreateTask(
     title
     description
     status
-    teams {
-      items {
-        id
-        name
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        taskTeamsId
-      }
-      nextToken
-      startedAt
-    }
     createdAt
     updatedAt
     _version
     _deleted
     _lastChangedAt
+    teamTasksId
   }
 }
 mutation UpdateTask(
@@ -38,25 +25,12 @@ mutation UpdateTask(
     title
     description
     status
-    teams {
-      items {
-        id
-        name
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        taskTeamsId
-      }
-      nextToken
-      startedAt
-    }
     createdAt
     updatedAt
     _version
     _deleted
     _lastChangedAt
+    teamTasksId
   }
 }
 mutation DeleteTask(
@@ -68,16 +42,33 @@ mutation DeleteTask(
     title
     description
     status
-    teams {
+    createdAt
+    updatedAt
+    _version
+    _deleted
+    _lastChangedAt
+    teamTasksId
+  }
+}
+mutation CreateTeam(
+  $input: CreateTeamInput!
+  $condition: ModelTeamConditionInput
+) {
+  createTeam(input: $input, condition: $condition) {
+    id
+    name
+    tasks {
       items {
         id
-        name
+        title
+        description
+        status
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
-        taskTeamsId
+        teamTasksId
       }
       nextToken
       startedAt
@@ -89,21 +80,6 @@ mutation DeleteTask(
     _lastChangedAt
   }
 }
-mutation CreateTeam(
-  $input: CreateTeamInput!
-  $condition: ModelTeamConditionInput
-) {
-  createTeam(input: $input, condition: $condition) {
-    id
-    name
-    createdAt
-    updatedAt
-    _version
-    _deleted
-    _lastChangedAt
-    taskTeamsId
-  }
-}
 mutation UpdateTeam(
   $input: UpdateTeamInput!
   $condition: ModelTeamConditionInput
@@ -111,12 +87,27 @@ mutation UpdateTeam(
   updateTeam(input: $input, condition: $condition) {
     id
     name
+    tasks {
+      items {
+        id
+        title
+        description
+        status
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        teamTasksId
+      }
+      nextToken
+      startedAt
+    }
     createdAt
     updatedAt
     _version
     _deleted
     _lastChangedAt
-    taskTeamsId
   }
 }
 mutation DeleteTeam(
@@ -126,12 +117,27 @@ mutation DeleteTeam(
   deleteTeam(input: $input, condition: $condition) {
     id
     name
+    tasks {
+      items {
+        id
+        title
+        description
+        status
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        teamTasksId
+      }
+      nextToken
+      startedAt
+    }
     createdAt
     updatedAt
     _version
     _deleted
     _lastChangedAt
-    taskTeamsId
   }
 }
 mutation CreateNote(

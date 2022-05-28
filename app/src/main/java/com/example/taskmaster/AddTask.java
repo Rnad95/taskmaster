@@ -16,6 +16,7 @@ import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.AWSDataStorePlugin;
 import com.amplifyframework.datastore.generated.model.Task;
+import com.amplifyframework.datastore.generated.model.Team;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.List;
@@ -29,7 +30,6 @@ public class AddTask extends AppCompatActivity {
         public void onClick(View view) {
 
             Intent startThirdActivityIntent = new Intent(getApplicationContext(), AllTasks.class);
-//            startThirdActivityIntent.putExtra("PassingTest","Test test test");
             startActivity(startThirdActivityIntent);
 
         }
@@ -49,27 +49,39 @@ public class AddTask extends AppCompatActivity {
                 configureAmplify();
 
                 Spinner taskStateField = findViewById(R.id.state_of_task);
-//                Spinner taskTeamField = findViewById(R.id.team_of_task);
+                Spinner taskTeamField = findViewById(R.id.team_of_task);
 
                 String taskTitle = taskTitleField.getText().toString();
                 String taskBody = taskBodyField.getText().toString();
                 String taskState =  taskStateField.getSelectedItem().toString();
+                String taskTeam =  taskTeamField.getSelectedItem().toString();
 
 
-                Task task = Task.builder()
-                        .title(taskTitle.toString())
-                        .description(taskBody.toString())
-                        .status(taskState)
-                        .build();
 
+                Team team = Team.builder()
+                                .name(taskTeam)
+                                .build();
 
-                Amplify.API.query(ModelMutation.create(task),
-                        success-> Log.i(TAG, ""),
+                Amplify.API.query(ModelMutation.create(team),
+                        success-> {
+                            Log.i(TAG, "");
+                            Task task = Task.builder()
+                                    .title(taskTitle.toString())
+                                    .description(taskBody.toString())
+                                    .status(taskState)
+                                    .teamTasksId(success.getData().getId())
+                                    .build();
+
+                            Amplify.DataStore.save(task,
+                                    taskSuccess -> Log.i(TAG, "Saved task: " + taskSuccess.item().getTitle()),
+                                    error -> Log.e(TAG, "Could not save item to DataStore", error)
+                            );
+                        },
                         error -> Log.e(TAG,"Error",error)
                 );
 
-                Amplify.DataStore.save(task,
-                        success -> Log.i(TAG, "Saved item save: " + success.item().getTitle()),
+                Amplify.DataStore.save(team,
+                        success -> Log.i(TAG, "Saved team: " + success.item().getName()),
                         error -> Log.e(TAG, "Could not save item to DataStore", error)
                 );
 
@@ -88,17 +100,17 @@ public class AddTask extends AppCompatActivity {
                 );
 
 
-                com.example.taskmaster.Task taskMaster = new com.example.taskmaster.Task(task.getTitle(),task.getDescription(),task.getStatus());
-                Long newTaskId = AppDatabase.getInstance(getApplicationContext()).taskDao().insertTask(taskMaster);
-
-                System.out.println("******************** Task ID = " + newTaskId + " ************************");
-                List<com.example.taskmaster.Task> allTasks=  AppDatabase.getInstance(getApplicationContext()).taskDao().getAll();
-
-
-                Intent intent = new Intent(getApplicationContext(), AllTasks.class);
-                intent.putExtra("PassingTask", task.toString());
-                setResult(RESULT_OK,intent);
-                finish();
+//                com.example.taskmaster.Task taskMaster = new com.example.taskmaster.Task(task.getTitle(),task.getDescription(),task.getStatus());
+//                Long newTaskId = AppDatabase.getInstance(getApplicationContext()).taskDao().insertTask(taskMaster);
+//
+//                System.out.println("******************** Task ID = " + newTaskId + " ************************");
+//                List<com.example.taskmaster.Task> allTasks=  AppDatabase.getInstance(getApplicationContext()).taskDao().getAll();
+//
+//
+//                Intent intent = new Intent(getApplicationContext(), AllTasks.class);
+//                intent.putExtra("PassingTask", task.toString());
+//                setResult(RESULT_OK,intent);
+//                finish();
             }
         });
 

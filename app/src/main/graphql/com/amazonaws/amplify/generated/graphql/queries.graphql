@@ -5,25 +5,12 @@ query GetTask($id: ID!) {
     title
     description
     status
-    teams {
-      items {
-        id
-        name
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        taskTeamsId
-      }
-      nextToken
-      startedAt
-    }
     createdAt
     updatedAt
     _version
     _deleted
     _lastChangedAt
+    teamTasksId
   }
 }
 query ListTasks(
@@ -37,15 +24,12 @@ query ListTasks(
       title
       description
       status
-      teams {
-        nextToken
-        startedAt
-      }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
+      teamTasksId
     }
     nextToken
     startedAt
@@ -68,15 +52,12 @@ query SyncTasks(
       title
       description
       status
-      teams {
-        nextToken
-        startedAt
-      }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
+      teamTasksId
     }
     nextToken
     startedAt
@@ -86,12 +67,27 @@ query GetTeam($id: ID!) {
   getTeam(id: $id) {
     id
     name
+    tasks {
+      items {
+        id
+        title
+        description
+        status
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+        teamTasksId
+      }
+      nextToken
+      startedAt
+    }
     createdAt
     updatedAt
     _version
     _deleted
     _lastChangedAt
-    taskTeamsId
   }
 }
 query ListTeams(
@@ -103,12 +99,15 @@ query ListTeams(
     items {
       id
       name
+      tasks {
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-      taskTeamsId
     }
     nextToken
     startedAt
@@ -129,12 +128,15 @@ query SyncTeams(
     items {
       id
       name
+      tasks {
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
       _deleted
       _lastChangedAt
-      taskTeamsId
     }
     nextToken
     startedAt
