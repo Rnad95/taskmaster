@@ -10,15 +10,41 @@
         android:id="@+id/edit_text_username_setting"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="267dp"
         android:layout_marginStart="20dp"
+        android:layout_marginTop="36dp"
         android:layout_marginEnd="20dp"
-        android:hint="Enter Your Username"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         android:autofillHints=""
-        android:inputType="textPostalAddress" />
+        android:hint="Enter Your Username"
+        android:inputType="textPostalAddress"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_select_team" />
+
+    <Spinner
+        android:id="@+id/team_of_task_setting_page"
+        android:layout_width="245dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="24dp"
+        android:entries="@array/team_setting"
+        android:hint="Choose the team of this Task"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/task_title3" />
+
+
+    <TextView
+        android:id="@+id/task_title3"
+        android:layout_width="137dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="288dp"
+        android:autofillHints=""
+        android:text="Choose the Team"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btn_save"
@@ -30,4 +56,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:text="Save"/>
+
+    <Button
+        android:id="@+id/btn_select_team"
+        android:layout_width="153dp"
+        android:layout_height="49dp"
+        android:layout_marginTop="48dp"
+        android:enabled="true"
+        android:text="Select Team"
+        android:shadowDx="@integer/material_motion_duration_long_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/team_of_task_setting_page" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

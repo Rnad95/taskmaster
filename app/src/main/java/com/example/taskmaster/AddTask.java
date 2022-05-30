@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.aws.AWSApiPlugin;
 import com.amplifyframework.api.graphql.model.ModelMutation;
+import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.AWSDataStorePlugin;
 import com.amplifyframework.datastore.generated.model.Task;
@@ -46,10 +47,9 @@ public class AddTask extends AppCompatActivity {
             public void onClick(View view) {
                 EditText taskTitleField = findViewById(R.id.input_title);
                 EditText taskBodyField = findViewById(R.id.description_task);
-                configureAmplify();
 
                 Spinner taskStateField = findViewById(R.id.state_of_task);
-                Spinner taskTeamField = findViewById(R.id.team_of_task);
+                Spinner taskTeamField = findViewById(R.id.team_of_task_setting_page);
 
                 String taskTitle = taskTitleField.getText().toString();
                 String taskBody = taskBodyField.getText().toString();
@@ -58,31 +58,44 @@ public class AddTask extends AppCompatActivity {
 
 
 
-                Team team = Team.builder()
-                                .name(taskTeam)
-                                .build();
+                Amplify.API.query(ModelQuery.list(Team.class, Team.NAME.eq(taskTeam)),
 
-                Amplify.API.query(ModelMutation.create(team),
-                        success-> {
-                            Log.i(TAG, "");
-                            Task task = Task.builder()
-                                    .title(taskTitle.toString())
-                                    .description(taskBody.toString())
-                                    .status(taskState)
-                                    .teamTasksId(success.getData().getId())
-                                    .build();
+                        success -> {
+                            Log.i(TAG, "Success");
 
-                            Amplify.DataStore.save(task,
-                                    taskSuccess -> Log.i(TAG, "Saved task: " + taskSuccess.item().getTitle()),
-                                    error -> Log.e(TAG, "Could not save item to DataStore", error)
-                            );
+                            for (Team loop : success.getData()) {
+                                if(loop.getName().equals(taskTeam)){
+                                    System.out.println("****************************** LOOP NAME"+ loop.getName());
+                                     Task task = Task.builder()
+                                            .title(taskTitle)
+                                            .description(taskBody)
+                                            .status(taskState)
+                                            .teamTasksId(loop.getId().toString())
+                                            .build();
+
+                                    Amplify.DataStore.save(task,
+                                            taskSuccess -> Log.i(TAG, "Saved taskOfficial: " + taskSuccess.item().getTitle()),
+                                            error -> Log.e(TAG, "Could not save item to DataStore", error)
+                                    );
+
+                                    Amplify.API.mutate(ModelMutation.create(task),
+                                            successSaveToAPI -> Log.i(TAG,"Saved item: "+ successSaveToAPI.getData().getTitle()),
+                                            error -> Log.e(TAG,"Could not save to API" + error)
+                                    );
+
+//                                    com.example.taskmaster.Task taskMaster = new com.example.taskmaster.Task(task.getTitle(),task.getDescription(),task.getStatus());
+//                                    Long newTaskId = AppDatabase.getInstance(getApplicationContext()).taskDao().insertTask(taskMaster);
+//                                    System.out.println("******************** Task ID = " + newTaskId + " ************************");
+//                                    List<com.example.taskmaster.Task> allTasks=  AppDatabase.getInstance(getApplicationContext()).taskDao().getAll();
+
+
+                                    Intent intent = new Intent(getApplicationContext(), AllTasks.class);
+//                                    intent.putExtra("PassingTask", task.toString());
+                                    setResult(RESULT_OK,intent);
+                                }
+                            }
                         },
-                        error -> Log.e(TAG,"Error",error)
-                );
-
-                Amplify.DataStore.save(team,
-                        success -> Log.i(TAG, "Saved team: " + success.item().getName()),
-                        error -> Log.e(TAG, "Could not save item to DataStore", error)
+                        error -> Log.e(TAG, "Error", error)
                 );
 
 
@@ -100,32 +113,10 @@ public class AddTask extends AppCompatActivity {
                 );
 
 
-//                com.example.taskmaster.Task taskMaster = new com.example.taskmaster.Task(task.getTitle(),task.getDescription(),task.getStatus());
-//                Long newTaskId = AppDatabase.getInstance(getApplicationContext()).taskDao().insertTask(taskMaster);
-//
-//                System.out.println("******************** Task ID = " + newTaskId + " ************************");
-//                List<com.example.taskmaster.Task> allTasks=  AppDatabase.getInstance(getApplicationContext()).taskDao().getAll();
-//
-//
-//                Intent intent = new Intent(getApplicationContext(), AllTasks.class);
-//                intent.putExtra("PassingTask", task.toString());
-//                setResult(RESULT_OK,intent);
-//                finish();
+                finish();
             }
         });
 
     }
 
-    private void configureAmplify(){
-
-        try {
-            Amplify.addPlugin(new AWSApiPlugin());
-            Amplify.addPlugin(new AWSDataStorePlugin());
-            Amplify.configure(getApplicationContext());
-
-            Log.i(TAG, "Initialized Amplify");
-        } catch (AmplifyException e) {
-            Log.e(TAG, "Could not initialize Amplify", e);
-        }
-    }
 }

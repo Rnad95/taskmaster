@@ -24,13 +24,11 @@ public class RecyclerViewTest {
 
     @Test
     public void test_List(){
-        int LIST_ITEM = 5;
         ArrayList<Task> tasks = new ArrayList<>();
         tasks.add(new Task("Reading","Read The Sea and The Old Man", State.NEW));
         tasks.add(new Task("Cook","Cook Pasta", State.COMPLETE));
         tasks.add(new Task("Mira","Take care of your niece", State.PROGRESS));
 
-//        onView(wit)
     }
 
 

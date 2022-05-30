@@ -15,13 +15,30 @@
         <item>Programming</item>
         <item>Sport</item>
     </string-array>
+
+
+    <string-array name="team_setting">
+        <item>Reading</item>
+        <item>Programming</item>
+        <item>Sport</item>
+    </string-array>
+
     <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_signup">SignUpActivity</string>
+
     <string name="prompt_email">Email</string>
+    <string name="prompt_username">Username</string>
+
     <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_up">Sign Up</string>
+    <string name="label_enter_code">Enter verification code</string>
+
+    <string name="action_sign_up_short">Sign Up</string>
+    <string name="action_sign_in">Sign in</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="welcome">"Welcome !"</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="sign_up_prompt">Don\'t have Account? SIGN UP</string>
 </resources>

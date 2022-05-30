@@ -48,8 +48,8 @@ public class EspressoUITest {
     public void test_navToAddTask(){
         onView(withId(R.id.add_task)).perform(click());
         onView(withId(R.id.add_task_activity)).check(matches(isDisplayed()));
-
     }
+
 
 
 

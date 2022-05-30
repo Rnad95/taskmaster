@@ -22,10 +22,12 @@ import android.widget.Toast;
 
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.aws.AWSApiPlugin;
+import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.AWSDataStorePlugin;
 import com.amplifyframework.datastore.generated.model.Task;
+import com.amplifyframework.datastore.generated.model.Team;
 
 
 import java.io.Serializable;
@@ -37,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView mUsernameText;
     Handler handler;
     TaskAdapter adapter;
+    Bundle bundle1;
+    String teamData="Reading";
     RecyclerView allTaskRecyclerView;
     List<Task> allTasks;
 
@@ -61,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        authSession();
         Button mAddTaskButton = findViewById(R.id.add_task);
         Button mAllTaskButton = findViewById(R.id.all_task);
 
@@ -68,30 +73,44 @@ public class MainActivity extends AppCompatActivity {
         mAllTaskButton.setOnClickListener(mClickListener2);
         mUsernameText = findViewById(R.id.txt_username);
 
+//
+//        try {
+//            Amplify.addPlugin(new AWSApiPlugin());
+//            Amplify.addPlugin(new AWSDataStorePlugin());
+//            Amplify.configure(getApplicationContext());
+//
+//            Log.i(TAG, "Initialized Amplify");
+//        } catch (AmplifyException e) {
+//            Log.e(TAG, "Could not initialize Amplify", e);
+//        }
 
-        try {
-            Amplify.addPlugin(new AWSApiPlugin());
-            Amplify.addPlugin(new AWSDataStorePlugin());
-            Amplify.configure(getApplicationContext());
 
-            Log.i(TAG, "Initialized Amplify");
-        } catch (AmplifyException e) {
-            Log.e(TAG, "Could not initialize Amplify", e);
-        }
+        /**
+         * Create three teams
+         */
+//        Team team =Team.builder()
+//                .name("Sport")
+//                .build();
+//
+//        Amplify.API.mutate(ModelMutation.create(team),
+//                successSaveToAPI -> Log.i(TAG,"Saved item: "+ successSaveToAPI.getData().getName()),
+//                error -> Log.e(TAG,"Could not save to API" + error)
+//        );
 
-         handler = new Handler(Looper.getMainLooper(), msg -> {
-         allTaskRecyclerView = findViewById(R.id.show_recycler_view);
-        allTaskRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        handler = new Handler(Looper.getMainLooper(), msg -> {
+            allTaskRecyclerView = findViewById(R.id.show_recycler_view);
+            allTaskRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-             adapter = new TaskAdapter(
-                    allTasks, position -> {
+            adapter = new TaskAdapter(
+                    this.allTasks, position -> {
                 Intent intent = new Intent(getApplicationContext(), TaskDetails.class);
-                 intent.putExtra("SpecificData",allTasks.get(position).getTitle());
-                 intent.putExtra("stateData",allTasks.get(position).getStatus());
-                 intent.putExtra("bodyData",allTasks.get(position).getDescription());
+                intent.getExtras();
+                intent.putExtra("SpecificData",this.allTasks.get(position).getTitle());
+                intent.putExtra("stateData",this.allTasks.get(position).getStatus());
+                intent.putExtra("bodyData",this.allTasks.get(position).getDescription());
                 startActivity(intent);
             });
-             allTaskRecyclerView.setAdapter(adapter);
+            allTaskRecyclerView.setAdapter(adapter);
 
             return true;
         });
@@ -113,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("SpecificData",allTasks.get(position).getTitle());
         intent.putExtra("stateData",allTasks.get(position).getStatus());
         intent.putExtra("bodyData",allTasks.get(position).getDescription());
+
 
         startActivity(intent);
     }
@@ -170,14 +190,30 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_copyright:
                 Toast.makeText(this, "Copyright 2022", Toast.LENGTH_SHORT).show();
                 return true;
+            case R.id.action_logout:
+                logout();
+                Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show();
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
+    private void logout() {
+        Amplify.Auth.signOut(
+                () -> {
+                    Log.i(TAG, "Signed out successfully");
+                    startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                    authSession();
+                    finish();
+                },
+                error -> Log.e(TAG, error.toString())
+        );
+    }
+
     private void navigateToTaskDetails(int taskId) {
         Intent taskDetailsIntent = new Intent(this, TaskDetails.class);
-
         startActivity(taskDetailsIntent);
     }
 
@@ -188,36 +224,87 @@ public class MainActivity extends AppCompatActivity {
 
     private void setAddress() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mUsernameText.setText(sharedPreferences.getString(SettingPage.USERNAME, "Username Doesn't Define"));
+        mUsernameText.setText(sharedPreferences.getString(SettingPage.USERNAME, "Username"));
+
     }
 
     private void getTasks() {
-            Amplify.DataStore.query(
-                 Task.class,
-                    success -> {
-                        allTasks = new ArrayList<>();
 
-                        while (success.hasNext()) {
-                            Task task = success.next();
-                                allTasks.add(task);
+        if(getIntent().getExtras()!=null){
+            bundle1 = getIntent().getExtras();
+            teamData = bundle1.getString("teamSelect");
+            System.out.println("******************************* TEAM DATA =>"+ teamData);
+        }
+        Amplify.API.query(ModelQuery.list(Team.class),
+                success -> {
+                    List<Task> allTasks = new ArrayList<>();
+                    for (Team team : success.getData().getItems()) {
+                        if (team.getName().equals(teamData)) {
+                            for (Task task : team.getTasks()) {
+                                if (team.getId().equals(task.getTeamTasksId())) {
+                                    Log.i(TAG, "Success If ===> the Task Title is " + task.getTitle());
+                                    allTasks.add(task);
+                                }
+                            }
                         }
-                        Log.i(TAG, "Tasks => " + allTasks);
-                        Bundle bundle = new Bundle();
-                        bundle.putString("tasksList", success.toString());
+                    }
+                    this.allTasks = allTasks;
+                    Log.i(TAG, "Tasks => " + allTasks);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("TeamTasks", allTasks.toString());
 
-                        Message message = new Message();
-                        message.setData(bundle);
+                    Message message = new Message();
+                    message.setData(bundle);
 
-                        handler.sendMessage(message);
-
+                    handler.sendMessage(message);
                     runOnUiThread(() -> {
                         allTaskRecyclerView.setAdapter(adapter);
                     });
-                    },
-                    error -> Log.e(TAG, "Error "+error.toString(), error)
-            );
+                },
+                error -> Log.e(TAG, "Error", error)
+        );
+    }
 
-
+    /**
+     * Get Data from the aPI
+     */
+//
+//    private void getTasks() {
+//
+//        Amplify.API.query(
+//                ModelQuery.list(Task.class),
+//                success -> {
+//                    allTasks = new ArrayList<>();
+//
+//                    if (success.hasData()) {
+//                        for (Task task : success.getData()) {
+//                            allTasks.add(task);
+//                        }
+//                    }
+//                    Log.i(TAG, "Tasks => " + allTasks);
+//
+//                    Bundle bundle = new Bundle();
+//                    bundle.putString("tasksList", success.toString());
+//
+//                    Message message = new Message();
+//                    message.setData(bundle);
+//
+//                    handler.sendMessage(message);
+//
+//                    runOnUiThread(() -> {
+//                        allTaskRecyclerView.setAdapter(adapter);
+//                    });
+//                },
+//                error -> Log.e(TAG, error.toString(), error)
+//        );
+//
+//    }
+//
+    private void authSession(){
+        Amplify.Auth.fetchAuthSession(
+                result -> Log.i(TAG,"Auth Session" + result.toString()),
+                error -> Log.e(TAG, error.toString())
+        );
     }
 
 }

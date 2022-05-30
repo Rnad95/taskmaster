@@ -16,6 +16,8 @@ import static androidx.test.espresso.intent.Intents.intended;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 
+import android.content.Intent;
+
 import androidx.test.espresso.intent.rule.IntentsTestRule;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -39,12 +41,19 @@ public class SettingPageTest {
     public ActivityScenarioRule<SettingPage> activityRule =
         new ActivityScenarioRule<SettingPage>(SettingPage.class);
 
-    @Test
-    public void testSettingPage() {
+//    @Test
+//    public void testSettingPage() {
+//
+//        onView(withId(R.id.edit_text_username_setting)).perform(typeText("Renad"));
+//        onView(withId(R.id.main)).check(matches(isDisplayed()));
+////        onView(withId(R.id.txt_username)).check(matches(withText("Renad")));
+//    }
 
-        onView(withId(R.id.edit_text_username_setting)).perform(typeText("Renad"));
-        onView(withId(R.id.btn_save)).perform(click());
-        onView(withText("Renad")).check(matches(isDisplayed()));
+    @Test
+    public void test_navToHomePage() {
+        onView(withId(R.id.team_of_task_setting_page)).check(matches(isDisplayed()));
 
     }
+
+
 }

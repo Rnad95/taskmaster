@@ -33,15 +33,15 @@ public class AllTasks extends AppCompatActivity implements TaskAdapter.OnTaskLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_third3);
 
-        try {
-            Amplify.addPlugin(new AWSApiPlugin());
-            Amplify.addPlugin(new AWSDataStorePlugin());
-            Amplify.configure(getApplicationContext());
-
-            Log.i(TAG, "Initialized Amplify");
-        } catch (AmplifyException e) {
-            Log.e(TAG, "Could not initialize Amplify", e);
-        }
+//        try {
+//            Amplify.addPlugin(new AWSApiPlugin());
+//            Amplify.addPlugin(new AWSDataStorePlugin());
+//            Amplify.configure(getApplicationContext());
+//
+//            Log.i(TAG, "Initialized Amplify");
+//        } catch (AmplifyException e) {
+//            Log.e(TAG, "Could not initialize Amplify", e);
+//        }
 
         handler = new Handler(Looper.getMainLooper(), msg -> {
             allTaskRecyclerView = findViewById(R.id.show_recycler_view);
@@ -96,7 +96,6 @@ public class AllTasks extends AppCompatActivity implements TaskAdapter.OnTaskLis
 
                     Message message = new Message();
                     message.setData(bundle);
-
                     handler.sendMessage(message);
 
                     runOnUiThread(() -> {

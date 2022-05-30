@@ -80,3 +80,28 @@ Check the Important UI Element and the navigation from the HomePage to Task Deta
 **TaskDetails:**
 
 ![TaskDetails](screenshots/Lab32/taskDetails.jpeg)
+
+## Lab - 33
+
+---
+
+1. Team entity added with a reasonable structure
+2. Add a team then associate teams with tasks
+3. pt Show only the selected team’s tasks on homepage
+
+**Home Page When We Start Application :**
+
+![home](screenshots/Lab33/HomePage.jpeg)
+
+**Select TEAM:**
+
+![select team](screenshots/Lab33/SettingPage.jpeg)
+
+**After Selected TEAM:**
+
+![TaskDetails](screenshots/Lab33/homePageAfterSelectTeam.jpeg)
+
+**Add Team Selected To AddTask Page:**
+
+![TaskDetails](screenshots/Lab33/addTask.jpeg)
+

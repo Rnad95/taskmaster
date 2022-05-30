@@ -35,4 +35,12 @@ public class Team {
         this.name = name;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public String getIdTeam() {
+        String str = ""+id;
+        return str;
+    }
 }

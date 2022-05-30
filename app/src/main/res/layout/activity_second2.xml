@@ -90,7 +90,7 @@
         app:layout_constraintTop_toBottomOf="@+id/task_desc" />
 
     <Spinner
-        android:id="@+id/team_of_task"
+        android:id="@+id/team_of_task_setting_page"
         android:layout_width="245dp"
         android:layout_height="43dp"
         android:layout_marginStart="80dp"
