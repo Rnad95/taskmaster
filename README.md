@@ -105,3 +105,20 @@ Check the Important UI Element and the navigation from the HomePage to Task Deta
 
 ![TaskDetails](screenshots/Lab33/addTask.jpeg)
 
+## Lab - 36
+
+1. AddingCognito added with sign up page
+![sign up](screenshots/Lab36/signup.jpeg)
+
+2. Adding sign up verification page
+![verfy](screenshots/Lab36/verification.jpeg)
+
+3. Create login page
+![login](screenshots/Lab36/login.jpeg)
+
+4. Add Logout functionality
+![logout](screenshots/Lab36/logout.jpeg)
+![logout click](screenshots/Lab36/logout-button.jpeg)
+
+5. AWS 
+![AWS](screenshots/Lab36/aws.png)
