@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     Handler handler;
     TaskAdapter adapter;
     Bundle bundle1;
-    String teamData="Reading";
+    String teamData = "Reading";
     RecyclerView allTaskRecyclerView;
     List<Task> allTasks;
 
@@ -105,9 +106,9 @@ public class MainActivity extends AppCompatActivity {
                     this.allTasks, position -> {
                 Intent intent = new Intent(getApplicationContext(), TaskDetails.class);
                 intent.getExtras();
-                intent.putExtra("SpecificData",this.allTasks.get(position).getTitle());
-                intent.putExtra("stateData",this.allTasks.get(position).getStatus());
-                intent.putExtra("bodyData",this.allTasks.get(position).getDescription());
+                intent.putExtra("SpecificData", this.allTasks.get(position).getTitle());
+                intent.putExtra("stateData", this.allTasks.get(position).getStatus());
+                intent.putExtra("bodyData", this.allTasks.get(position).getDescription());
                 startActivity(intent);
             });
             allTaskRecyclerView.setAdapter(adapter);
@@ -117,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
 
 
         Button addBtn = findViewById(R.id.add_task);
-        addBtn.setOnClickListener((v)->{
+        addBtn.setOnClickListener((v) -> {
             Intent intent = new Intent(MainActivity.this, AddTask.class);
             startActivity(intent);
         });
@@ -128,10 +129,10 @@ public class MainActivity extends AppCompatActivity {
     //    @Override
     public void onTaskListener(int position) {
         Intent intent = new Intent(getApplicationContext(), TaskDetails.class);
-        System.out.println("***************** POSITION ==>"+ position);
-        intent.putExtra("SpecificData",allTasks.get(position).getTitle());
-        intent.putExtra("stateData",allTasks.get(position).getStatus());
-        intent.putExtra("bodyData",allTasks.get(position).getDescription());
+        System.out.println("***************** POSITION ==>" + position);
+        intent.putExtra("SpecificData", allTasks.get(position).getTitle());
+        intent.putExtra("stateData", allTasks.get(position).getStatus());
+        intent.putExtra("bodyData", allTasks.get(position).getDescription());
 
 
         startActivity(intent);
@@ -195,6 +196,21 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(this, "Logout", Toast.LENGTH_SHORT).show();
                 return true;
 
+            case R.id.action_share:
+                // Create the text message with a string.
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.putExtra(Intent.EXTRA_TEXT, "I want to share");
+            sendIntent.setType("image/*");
+
+            // Try to invoke the intent.
+            try {
+                startActivity(sendIntent);
+            } catch (ActivityNotFoundException e) {
+                // Define what your app should do if no activity can handle the intent.
+            }
+                return true;
+
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -230,10 +246,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void getTasks() {
 
-        if(getIntent().getExtras()!=null){
+        if (getIntent().getExtras() != null) {
             bundle1 = getIntent().getExtras();
             teamData = bundle1.getString("teamSelect");
-            System.out.println("******************************* TEAM DATA =>"+ teamData);
+            System.out.println("******************************* TEAM DATA =>" + teamData);
         }
         Amplify.API.query(ModelQuery.list(Team.class),
                 success -> {
@@ -300,9 +316,9 @@ public class MainActivity extends AppCompatActivity {
 //
 //    }
 //
-    private void authSession(){
+    private void authSession() {
         Amplify.Auth.fetchAuthSession(
-                result -> Log.i(TAG,"Auth Session" + result.toString()),
+                result -> Log.i(TAG, "Auth Session" + result.toString()),
                 error -> Log.e(TAG, error.toString())
         );
     }

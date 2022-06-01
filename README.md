@@ -122,3 +122,15 @@ Check the Important UI Element and the navigation from the HomePage to Task Deta
 
 5. AWS 
 ![AWS](screenshots/Lab36/aws.png)
+
+## Lab - 38 
+
+---
+
+1. Add an intent filter to your application such that a user can hit the “share” button on an image in another application, choose TaskMaster as the app to share that image with,
+
+![share](screenshots/Lab38/share_image.jpeg)
+
+2. Take the image directly to the Add a Task activity with that image pre-selected
+
+  ![pre-select image](screenshots/Lab38/add_task_page.jpeg)

@@ -59,7 +59,7 @@ public class SettingPage extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Spinner mTeamSpinnerText = findViewById(R.id.team_of_task_setting_page);
-                 mTeamSelected =  mTeamSpinnerText.getSelectedItem().toString();
+                mTeamSelected =  mTeamSpinnerText.getSelectedItem().toString();
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 intent.putExtra("teamSelect",mTeamSelected);
                 startActivity(intent);

@@ -17,4 +17,10 @@
         android:orderInCategory="200"
         app:showAsAction="ifRoom" />
 
+    <item android:id="@+id/action_share"
+        android:title="share"
+        android:orderInCategory="200"
+        app:showAsAction="always"
+        android:icon="@drawable/share"/>
+
 </menu>
