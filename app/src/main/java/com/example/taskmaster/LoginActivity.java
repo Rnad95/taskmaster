@@ -1,10 +1,11 @@
 package com.example.taskmaster;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
+
+import androidx.annotation.StringRes;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -15,45 +16,46 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.lifecycle.ViewModelProvider;
-
 import com.amplifyframework.core.Amplify;
-import com.example.taskmaster.databinding.ActivityLoginBinding;
-
 
 
 public class LoginActivity extends AppCompatActivity {
 
     private static final String TAG = LoginActivity.class.getSimpleName();
+    public static final String USERNAME = "username";
     private ProgressBar loadingProgressBar;
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_login);
 
-//        final TextView signUpPrompt = findViewById(R.id.sign_up_prompt);
-        final EditText usernameEditText = findViewById(R.id.username);
-        final EditText passwordEditText = findViewById(R.id.password);
-        final Button loginButton = findViewById(R.id.login);
+         EditText usernameEditText = findViewById(R.id.email);
+         EditText passwordEditText = findViewById(R.id.password);
+         Button loginButton = findViewById(R.id.login);
+         TextView signUpPrompt = findViewById(R.id.sign_up_prompt);
+        String username =usernameEditText.getText().toString();
+        String password = passwordEditText.getText().toString();
+
+
         loadingProgressBar = findViewById(R.id.loading);
 
-//        signUpPrompt.setOnClickListener(view -> {
-//            Intent navigateToSignUpIntent = new Intent(this, SignUpActivity.class);
-//            startActivity(navigateToSignUpIntent);
-//        });
+        signUpPrompt.setOnClickListener(view -> {
+            Intent navigateToSignUpIntent = new Intent(this, SignUpActivity.class);
+            startActivity(navigateToSignUpIntent);
+        });
 
         passwordEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
+//                    usernameEditText.getText().toString();
+//                    passwordEditText.getText().toString();
+
                     loginButton.setEnabled(true);
+
                 }
                 return false;
             }
@@ -63,19 +65,32 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 loadingProgressBar.setVisibility(View.VISIBLE);
-                login(usernameEditText.getText().toString(), passwordEditText.getText().toString());
+
+                login(usernameEditText.getText().toString(),
+                        passwordEditText.getText().toString());
             }
         });
     }
 
-    private void login(String email, String password) {
+    private void updateUiWithUser(String str) {
+        String welcome = getString(R.string.welcome) +"";
+        // TODO : initiate successful logged in experience
+        Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
+    }
+
+    private void showLoginFailed(@StringRes Integer errorString) {
+        Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
+    }
+
+    private void login(String username, String password) {
         Amplify.Auth.signIn(
-                email,
+                username,
                 password,
                 result -> {
                     Log.i(TAG, result.isSignInComplete() ? "Sign in succeeded" : "Sign in not complete");
                     loadingProgressBar.setVisibility(View.INVISIBLE);
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+
+                    startActivity( new Intent(LoginActivity.this, MainActivity.class));
                 },
                 error -> Log.e(TAG, error.toString())
         );

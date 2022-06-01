@@ -29,5 +29,59 @@
         "taskmaster52fa5ab2": {}
       }
     }
+  },
+  "taskmaster": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-taskmaster-taskmaster-214358-authRole",
+      "UnauthRoleArn": "arn:aws:iam::366419673945:role/amplify-taskmaster-taskmaster-214358-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::366419673945:role/amplify-taskmaster-taskmaster-214358-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-taskmaster-taskmaster-214358-deployment",
+      "UnauthRoleName": "amplify-taskmaster-taskmaster-214358-unauthRole",
+      "StackName": "amplify-taskmaster-taskmaster-214358",
+      "StackId": "arn:aws:cloudformation:us-east-1:366419673945:stack/amplify-taskmaster-taskmaster-214358/2a5cc620-deb6-11ec-b6bf-0ac56b30a425",
+      "AmplifyAppId": "d94um6ywg0e4y"
+    },
+    "categories": {
+      "auth": {
+        "taskmaster52fa5ab2": {}
+      }
+    }
+  },
+  "master": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-taskmaster-master-222147-authRole",
+      "UnauthRoleArn": "arn:aws:iam::366419673945:role/amplify-taskmaster-master-222147-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::366419673945:role/amplify-taskmaster-master-222147-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-taskmaster-master-222147-deployment",
+      "UnauthRoleName": "amplify-taskmaster-master-222147-unauthRole",
+      "StackName": "amplify-taskmaster-master-222147",
+      "StackId": "arn:aws:cloudformation:us-east-1:366419673945:stack/amplify-taskmaster-master-222147/75cd4440-debb-11ec-96d8-0ea3d261e169",
+      "AmplifyAppId": "d3s9iwyqcech04"
+    },
+    "categories": {
+      "auth": {
+        "taskmaster52fa5ab2": {}
+      }
+    }
+  },
+  "mastertask": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-taskmaster-mastertask-224250-authRole",
+      "UnauthRoleArn": "arn:aws:iam::366419673945:role/amplify-taskmaster-mastertask-224250-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::366419673945:role/amplify-taskmaster-mastertask-224250-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-taskmaster-mastertask-224250-deployment",
+      "UnauthRoleName": "amplify-taskmaster-mastertask-224250-unauthRole",
+      "StackName": "amplify-taskmaster-mastertask-224250",
+      "StackId": "arn:aws:cloudformation:us-east-1:366419673945:stack/amplify-taskmaster-mastertask-224250/66149460-debe-11ec-a14c-0e1c5f473ffb",
+      "AmplifyAppId": "d394i7dvyx7ny8"
+    },
+    "categories": {
+      "auth": {
+        "taskmaster28db12d8": {}
+      }
+    }
   }
 }

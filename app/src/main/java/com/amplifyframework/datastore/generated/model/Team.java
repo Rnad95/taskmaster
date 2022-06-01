@@ -1,5 +1,6 @@
 package com.amplifyframework.datastore.generated.model;
 
+import com.amplifyframework.core.model.annotations.HasMany;
 
 import java.util.List;
 import java.util.UUID;
@@ -21,10 +22,9 @@ import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 public final class Team implements Model {
   public static final QueryField ID = field("Team", "id");
   public static final QueryField NAME = field("Team", "name");
-  public static final QueryField TASK_TEAMS_ID = field("Team", "taskTeamsId");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="String") String name;
-  private final @ModelField(targetType="ID") String taskTeamsId;
+  private final @ModelField(targetType="Task") @HasMany(associatedWith = "teamTasksId", type = Task.class) List<Task> tasks = null;
   public String getId() {
       return id;
   }
@@ -33,14 +33,13 @@ public final class Team implements Model {
       return name;
   }
   
-  public String getTaskTeamsId() {
-      return taskTeamsId;
+  public List<Task> getTasks() {
+      return tasks;
   }
   
-  private Team(String id, String name, String taskTeamsId) {
+  private Team(String id, String name) {
     this.id = id;
     this.name = name;
-    this.taskTeamsId = taskTeamsId;
   }
   
   @Override
@@ -52,8 +51,7 @@ public final class Team implements Model {
       } else {
       Team team = (Team) obj;
       return ObjectsCompat.equals(getId(), team.getId()) &&
-              ObjectsCompat.equals(getName(), team.getName()) &&
-              ObjectsCompat.equals(getTaskTeamsId(), team.getTaskTeamsId());
+              ObjectsCompat.equals(getName(), team.getName());
       }
   }
   
@@ -62,7 +60,6 @@ public final class Team implements Model {
     return new StringBuilder()
       .append(getId())
       .append(getName())
-      .append(getTaskTeamsId())
       .toString()
       .hashCode();
   }
@@ -72,8 +69,7 @@ public final class Team implements Model {
     return new StringBuilder()
       .append("Team {")
       .append("id=" + String.valueOf(getId()) + ", ")
-      .append("name=" + String.valueOf(getName()) + ", ")
-      .append("taskTeamsId=" + String.valueOf(getTaskTeamsId()))
+      .append("name=" + String.valueOf(getName()))
       .append("}")
       .toString();
   }
@@ -93,47 +89,36 @@ public final class Team implements Model {
   public static Team justId(String id) {
     return new Team(
       id,
-      null,
       null
     );
   }
   
   public CopyOfBuilder copyOfBuilder() {
     return new CopyOfBuilder(id,
-      name,
-      taskTeamsId);
+      name);
   }
   public interface BuildStep {
     Team build();
     BuildStep id(String id);
     BuildStep name(String name);
-    BuildStep taskTeamsId(String taskTeamsId);
   }
   
 
   public static class Builder implements BuildStep {
     private String id;
     private String name;
-    private String taskTeamsId;
     @Override
      public Team build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
         
         return new Team(
           id,
-          name,
-          taskTeamsId);
+          name);
     }
     
     @Override
      public BuildStep name(String name) {
         this.name = name;
-        return this;
-    }
-    
-    @Override
-     public BuildStep taskTeamsId(String taskTeamsId) {
-        this.taskTeamsId = taskTeamsId;
         return this;
     }
     
@@ -149,20 +134,14 @@ public final class Team implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String name, String taskTeamsId) {
+    private CopyOfBuilder(String id, String name) {
       super.id(id);
-      super.name(name)
-        .taskTeamsId(taskTeamsId);
+      super.name(name);
     }
     
     @Override
      public CopyOfBuilder name(String name) {
       return (CopyOfBuilder) super.name(name);
-    }
-    
-    @Override
-     public CopyOfBuilder taskTeamsId(String taskTeamsId) {
-      return (CopyOfBuilder) super.taskTeamsId(taskTeamsId);
     }
   }
   

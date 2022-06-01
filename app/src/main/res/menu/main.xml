@@ -11,4 +11,10 @@
         android:title="copyright"
         android:orderInCategory="200"
         app:showAsAction="never" />
+
+    <item android:id="@+id/action_logout"
+        android:title="Logout"
+        android:orderInCategory="200"
+        app:showAsAction="ifRoom" />
+
 </menu>
