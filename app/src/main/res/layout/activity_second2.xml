@@ -26,17 +26,27 @@
         android:layout_width="132dp"
         android:layout_height="60dp"
         android:layout_marginStart="136dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="40dp"
         android:text="ADD TASK"
-        app:layout_constraintBottom_toTopOf="@+id/total_tasks"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image_view" />
+
+    <Button
+        android:id="@+id/upload_image"
+        android:layout_width="176dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="44dp"
+        android:text="Upload image"
+        app:layout_constraintStart_toEndOf="@+id/image_view"
+        app:layout_constraintTop_toBottomOf="@+id/team_of_task_setting_page" />
 
     <TextView
         android:id="@+id/logo_name"
         android:layout_width="107dp"
         android:layout_height="40dp"
         android:layout_marginStart="152dp"
-        android:layout_marginTop="101dp"
+        android:layout_marginTop="32dp"
         android:text="Add Task"
         android:textSize="24dp"
         android:textStyle="bold"
@@ -47,12 +57,13 @@
         android:id="@+id/total_tasks"
         android:layout_width="100dp"
         android:layout_height="43dp"
-        android:layout_marginStart="148dp"
+        android:layout_marginStart="152dp"
         android:layout_marginBottom="16dp"
         android:text="total Tasks: 0"
         android:textSize="15dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/add_task_2" />
 
     <TextView
         android:id="@+id/task_desc"
@@ -94,7 +105,7 @@
         android:layout_width="245dp"
         android:layout_height="43dp"
         android:layout_marginStart="80dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:entries="@array/team"
         android:hint="Choose the team of this Task"
         app:layout_constraintStart_toStartOf="parent"
@@ -105,7 +116,7 @@
         android:layout_width="79dp"
         android:layout_height="0dp"
         android:layout_marginStart="40dp"
-        android:layout_marginTop="209dp"
+        android:layout_marginTop="100dp"
         android:text="Task title"
         android:textSize="10dp"
         android:textStyle="bold"
@@ -123,5 +134,15 @@
         android:text=""
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/task_title" />
+
+    <ImageView
+        android:id="@+id/image_view"
+        android:layout_width="92dp"
+        android:layout_height="84dp"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/team_of_task_setting_page"
+        app:srcCompat="@drawable/image" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
