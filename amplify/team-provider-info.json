@@ -80,7 +80,8 @@
     },
     "categories": {
       "auth": {
-        "taskmaster28db12d8": {}
+        "taskmaster28db12d8": {},
+        "true": {}
       }
     }
   }

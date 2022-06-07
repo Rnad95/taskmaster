@@ -4,6 +4,8 @@ subscription OnCreateTask {
     id
     title
     description
+    latitude
+    Lonitude
     status
     createdAt
     updatedAt
@@ -18,6 +20,8 @@ subscription OnUpdateTask {
     id
     title
     description
+    latitude
+    Lonitude
     status
     createdAt
     updatedAt
@@ -32,6 +36,8 @@ subscription OnDeleteTask {
     id
     title
     description
+    latitude
+    Lonitude
     status
     createdAt
     updatedAt
@@ -50,6 +56,8 @@ subscription OnCreateTeam {
         id
         title
         description
+        latitude
+        Lonitude
         status
         createdAt
         updatedAt
@@ -77,6 +85,8 @@ subscription OnUpdateTeam {
         id
         title
         description
+        latitude
+        Lonitude
         status
         createdAt
         updatedAt
@@ -104,6 +114,8 @@ subscription OnDeleteTeam {
         id
         title
         description
+        latitude
+        Lonitude
         status
         createdAt
         updatedAt

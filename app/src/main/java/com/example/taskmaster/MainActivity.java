@@ -74,17 +74,6 @@ public class MainActivity extends AppCompatActivity {
         mAllTaskButton.setOnClickListener(mClickListener2);
         mUsernameText = findViewById(R.id.txt_username);
 
-//
-//        try {
-//            Amplify.addPlugin(new AWSApiPlugin());
-//            Amplify.addPlugin(new AWSDataStorePlugin());
-//            Amplify.configure(getApplicationContext());
-//
-//            Log.i(TAG, "Initialized Amplify");
-//        } catch (AmplifyException e) {
-//            Log.e(TAG, "Could not initialize Amplify", e);
-//        }
-
 
         /**
          * Create three teams
@@ -109,6 +98,8 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("SpecificData", this.allTasks.get(position).getTitle());
                 intent.putExtra("stateData", this.allTasks.get(position).getStatus());
                 intent.putExtra("bodyData", this.allTasks.get(position).getDescription());
+                intent.putExtra("latitude",this.allTasks.get(position).getLatitude());
+                intent.putExtra("longitude",this.allTasks.get(position).getLonitude());
                 startActivity(intent);
             });
             allTaskRecyclerView.setAdapter(adapter);
@@ -133,6 +124,8 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("SpecificData", allTasks.get(position).getTitle());
         intent.putExtra("stateData", allTasks.get(position).getStatus());
         intent.putExtra("bodyData", allTasks.get(position).getDescription());
+        intent.putExtra("latitude",allTasks.get(position).getLatitude());
+        intent.putExtra("logitude",allTasks.get(position).getLonitude());
 
 
         startActivity(intent);
