@@ -345,7 +345,6 @@ public class AddTask extends AppCompatActivity implements EasyPermissions.Permis
             case REQUEST_CODE:
                 // Get photo picker response for single select.
                 Uri currentUri = data.getData();
-                Toast.makeText(getApplicationContext(), "Image Selected", Toast.LENGTH_SHORT).show();
                 mImageView.setImageURI(currentUri);
                 // Do stuff with the photo/video URI.
                 Log.i(TAG, "onActivityResult: the uri is => " + currentUri);
