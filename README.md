@@ -105,7 +105,26 @@ Check the Important UI Element and the navigation from the HomePage to Task Deta
 
 ![TaskDetails](screenshots/Lab33/addTask.jpeg)
 
+## Lab - 34
+
+---
+We created Final AAB and add it to the root.
+
+> To share our Application on Google we need to:
+
+1. open Google console then create a new app
+2. choose the name and these stuff then accept the developer policies and US export laws, then click on create App
+
+3. go to set up your app and notify them about your application's content like: app access, Ads, content rating, target audience, and so on
+4. then set up your store listing
+5. after that create new release and upload the abb or apk
+6. add some release notes then click on review release
+7. click on start rollout to Production
+8. the application is sent to review after the approval the app will be live on google play store
+
 ## Lab - 36
+
+---
 
 1. AddingCognito added with sign up page
 ![sign up](screenshots/Lab36/signup.jpeg)
