@@ -123,7 +123,7 @@ Check the Important UI Element and the navigation from the HomePage to Task Deta
 5. AWS 
 ![AWS](screenshots/Lab36/aws.png)
 
-## Lab - 38 
+## Lab - 38
 
 ---
 
@@ -134,3 +134,24 @@ Check the Important UI Element and the navigation from the HomePage to Task Deta
 2. Take the image directly to the Add a Task activity with that image pre-selected
 
   ![pre-select image](screenshots/Lab38/add_task_page.jpeg)
+
+## Lab - 39
+
+---
+
+Adding permission to the project get the coordinates to the user when we add a new task save the coordinate and push them to AWS DynamoDB
+
+## Lab - 41
+
+---
+
+1. Add analytics event to your app
+open aws dashboard using:
+
+> amplify console analytics
+
+![aws dashboard](screenshots/Lab41/aws-analytics.png)
+
+2. Add a button to read and translate the task description
+
+![](screenshots/Lab41/translate-the-description.jpeg)

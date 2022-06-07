@@ -167,26 +167,26 @@ public class TaskDetails extends AppCompatActivity {
      * Display image stuff
      */
     private void imageDisplay() {
-        Amplify.Storage.getUrl("image.jpg",
-                success ->{
-                    Log.i(TAG, "The root path is: " + getApplicationContext().getFilesDir());
-                    Log.i(TAG, "Successfully display: " + success.getUrl());
-                    Glide.with(this).load(getApplicationContext().getFilesDir().toURI()).into(imageView);
-                    },
-                error -> Log.e(TAG,  "display Failure", error)
-        );
+//        Amplify.Storage.getUrl("image.jpg",
+//                success ->{
+//                    Log.i(TAG, "The root path is: " + getApplicationContext().getFilesDir());
+//                    Log.i(TAG, "Successfully display: " + success.getUrl());
+//                    Glide.with(this).load(getApplicationContext().getFilesDir().toURI()).into(imageView);
+//                    },
+//                error -> Log.e(TAG,  "display Failure", error)
+//        );
 
     }
     private String downloadImage() {
-        Amplify.Storage.downloadFile(
-                "image.jpg",
-                new File(getApplicationContext().getFilesDir() + "/download.jpg"),
-                result -> {
-                    Log.i(TAG, "The root path is: " + getApplicationContext().getFilesDir());
-                    Log.i(TAG, "Successfully downloaded: " + result.getFile().getName().toString());
-                },
-                error -> Log.e(TAG,  "Download Failure", error)
-        );
+//        Amplify.Storage.downloadFile(
+//                "image.jpg",
+//                new File(getApplicationContext().getFilesDir() + "/download.jpg"),
+//                result -> {
+//                    Log.i(TAG, "The root path is: " + getApplicationContext().getFilesDir());
+//                    Log.i(TAG, "Successfully downloaded: " + result.getFile().getName().toString());
+//                },
+//                error -> Log.e(TAG,  "Download Failure", error)
+//        );
         return ""+getApplicationContext().getFilesDir();
     }
 
