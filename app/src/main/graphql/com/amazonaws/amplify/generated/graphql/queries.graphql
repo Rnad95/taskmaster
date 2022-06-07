@@ -4,6 +4,8 @@ query GetTask($id: ID!) {
     id
     title
     description
+    latitude
+    Lonitude
     status
     createdAt
     updatedAt
@@ -23,6 +25,8 @@ query ListTasks(
       id
       title
       description
+      latitude
+      Lonitude
       status
       createdAt
       updatedAt
@@ -51,6 +55,8 @@ query SyncTasks(
       id
       title
       description
+      latitude
+      Lonitude
       status
       createdAt
       updatedAt
@@ -72,6 +78,8 @@ query GetTeam($id: ID!) {
         id
         title
         description
+        latitude
+        Lonitude
         status
         createdAt
         updatedAt

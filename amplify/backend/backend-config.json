@@ -68,23 +68,24 @@
           ]
         }
       ]
-    },
-    "MyPlaceIndex": {
-      "isDefault": true,
+    }
+  },
+  "analytics": {
+    "taskmaster": {
+      "service": "Pinpoint",
+      "providerPlugin": "awscloudformation"
+    }
+  },
+  "predictions": {
+    "translateText46114b6a": {
       "providerPlugin": "awscloudformation",
-      "service": "PlaceIndex",
-      "dataProvider": "Here",
-      "dataSourceIntendedUse": "SingleUse",
-      "accessType": "AuthorizedAndGuestUsers",
-      "dependsOn": [
-        {
-          "category": "auth",
-          "resourceName": "taskmaster28db12d8",
-          "attributes": [
-            "UserPoolId"
-          ]
-        }
-      ]
+      "service": "Translate",
+      "convertType": "translateText"
+    },
+    "speechGenerator8aa26051": {
+      "providerPlugin": "awscloudformation",
+      "service": "Polly",
+      "convertType": "speechGenerator"
     }
   }
 }

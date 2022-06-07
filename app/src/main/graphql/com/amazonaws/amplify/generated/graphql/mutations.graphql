@@ -7,6 +7,8 @@ mutation CreateTask(
     id
     title
     description
+    latitude
+    Lonitude
     status
     createdAt
     updatedAt
@@ -24,6 +26,8 @@ mutation UpdateTask(
     id
     title
     description
+    latitude
+    Lonitude
     status
     createdAt
     updatedAt
@@ -41,6 +45,8 @@ mutation DeleteTask(
     id
     title
     description
+    latitude
+    Lonitude
     status
     createdAt
     updatedAt
@@ -62,6 +68,8 @@ mutation CreateTeam(
         id
         title
         description
+        latitude
+        Lonitude
         status
         createdAt
         updatedAt
@@ -92,6 +100,8 @@ mutation UpdateTeam(
         id
         title
         description
+        latitude
+        Lonitude
         status
         createdAt
         updatedAt
@@ -122,6 +132,8 @@ mutation DeleteTeam(
         id
         title
         description
+        latitude
+        Lonitude
         status
         createdAt
         updatedAt
