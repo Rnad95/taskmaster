@@ -73,7 +73,7 @@ public class AddTask extends AppCompatActivity implements EasyPermissions.Permis
     private static FusedLocationProviderClient fusedLocationProviderClient;
     private double latitude;
     private double longitude;
-
+    String imageKey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,7 +91,6 @@ public class AddTask extends AppCompatActivity implements EasyPermissions.Permis
         intent1.setType(intent1.ACTION_SEND);
         if (intent1 != null && intent1.getType() != null || intent1.getData() != null) {
             Uri imageUri = (Uri) intent1.getParcelableExtra(Intent.EXTRA_STREAM);
-            Toast.makeText(this, "Image Selected", Toast.LENGTH_SHORT).show();
             mImageView.setImageURI(imageUri);
         }
         mUploadImageButton.setOnClickListener(view -> {
@@ -143,6 +142,7 @@ public class AddTask extends AppCompatActivity implements EasyPermissions.Permis
                         longitude = ((float) location.getLongitude());
 
 
+
                     });
                 } else {
                     requestLocationPermission();
@@ -155,8 +155,9 @@ public class AddTask extends AppCompatActivity implements EasyPermissions.Permis
 
 //                    // upload to s3
 //                    // uploads the file
+                imageKey = taskTitle + ".jpg";
                 Amplify.Storage.uploadFile(
-                        taskTitle + ".jpg",
+                        imageKey,
                         file,
                         uploadSuccess -> {
                             Log.i(TAG, "upload image is succeed" + uploadSuccess.getKey());
@@ -174,6 +175,7 @@ public class AddTask extends AppCompatActivity implements EasyPermissions.Permis
                                                             .status(taskState)
                                                             .lonitude(longitude)
                                                             .latitude(latitude)
+                                                            .imageKey(imageKey)
                                                             .teamTasksId(loop.getId().toString())
                                                             .build();
 
@@ -214,6 +216,7 @@ public class AddTask extends AppCompatActivity implements EasyPermissions.Permis
                                                         .status(taskState)
                                                         .lonitude(longitude)
                                                         .latitude(latitude)
+                                                        .imageKey(imageKey)
                                                         .teamTasksId(loop.getId().toString())
                                                         .build();
 
@@ -311,32 +314,12 @@ public class AddTask extends AppCompatActivity implements EasyPermissions.Permis
 
     }
 
-    private void displayImage() {
-        Amplify.Storage.getUrl("image.jpg",
-                success -> {
-                    Log.i(TAG, "The root path is: " + getApplicationContext().getFilesDir());
-                    Log.i(TAG, "Successfully downloaded: " + success.getUrl());
 
-                },
-                error -> Log.e(TAG, "Download Failure", error)
-        );
-//        Amplify.Storage.downloadFile(
-//                "image.jpg",
-//                new File(getApplicationContext().getFilesDir() + "/download.jpg"),
-//                result -> {
-//                    Log.i(TAG, "The root path is: " + getApplicationContext().getFilesDir());
-//                    Log.i(TAG, "Successfully downloaded: " + result.getFile().getName());
-//                },
-//                error -> Log.e(TAG,  "Download Failure", error)
-//        );
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         if (resultCode != Activity.RESULT_OK) {
-            // Handle error
             Log.e(TAG, "onActivityResult: Error getting image from device");
             return;
         }

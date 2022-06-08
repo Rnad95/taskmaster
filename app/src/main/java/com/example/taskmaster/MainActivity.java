@@ -100,6 +100,8 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("bodyData", this.allTasks.get(position).getDescription());
                 intent.putExtra("latitude",this.allTasks.get(position).getLatitude());
                 intent.putExtra("longitude",this.allTasks.get(position).getLonitude());
+                intent.putExtra("imageKey",allTasks.get(position).getImageKey());
+
                 startActivity(intent);
             });
             allTaskRecyclerView.setAdapter(adapter);
@@ -126,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("bodyData", allTasks.get(position).getDescription());
         intent.putExtra("latitude",allTasks.get(position).getLatitude());
         intent.putExtra("logitude",allTasks.get(position).getLonitude());
-
+        intent.putExtra("imageKey",allTasks.get(position).getImageKey());
 
         startActivity(intent);
     }

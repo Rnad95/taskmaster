@@ -6,6 +6,7 @@ subscription OnCreateTask {
     description
     latitude
     Lonitude
+    imageKey
     status
     createdAt
     updatedAt
@@ -22,6 +23,7 @@ subscription OnUpdateTask {
     description
     latitude
     Lonitude
+    imageKey
     status
     createdAt
     updatedAt
@@ -38,6 +40,7 @@ subscription OnDeleteTask {
     description
     latitude
     Lonitude
+    imageKey
     status
     createdAt
     updatedAt
@@ -58,6 +61,7 @@ subscription OnCreateTeam {
         description
         latitude
         Lonitude
+        imageKey
         status
         createdAt
         updatedAt
@@ -87,6 +91,7 @@ subscription OnUpdateTeam {
         description
         latitude
         Lonitude
+        imageKey
         status
         createdAt
         updatedAt
@@ -116,6 +121,7 @@ subscription OnDeleteTeam {
         description
         latitude
         Lonitude
+        imageKey
         status
         createdAt
         updatedAt

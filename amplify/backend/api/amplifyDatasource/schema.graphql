@@ -6,6 +6,7 @@ type Task @model   {
   description: String
   latitude: Float
   Lonitude: Float
+  imageKey:String
   status: String
 
 }

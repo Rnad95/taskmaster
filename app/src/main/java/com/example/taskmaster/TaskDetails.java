@@ -1,8 +1,12 @@
 package com.example.taskmaster;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +26,7 @@ import com.amplifyframework.geo.options.GeoSearchByTextOptions;
 import com.amplifyframework.predictions.models.LanguageType;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.squareup.picasso.Picasso;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -29,6 +34,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 import java.util.Collections;
 
@@ -45,6 +51,8 @@ public class TaskDetails extends AppCompatActivity {
     private TextView translateData;
     private final MediaPlayer mp = new MediaPlayer();
     private Button mSpeechBtn;
+    private Uri uri;
+    private String imageKey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +62,7 @@ public class TaskDetails extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         double lat = bundle.getDouble("latitude");
         double longi = bundle.getDouble("longitude");
+        imageKey = bundle.getString("imageKey");
 
         TextView determinedData = findViewById(R.id.task_titlte_details_page);
         TextView stateData = findViewById(R.id.state_view);
@@ -89,27 +98,27 @@ public class TaskDetails extends AppCompatActivity {
         /**
          * try to display the image
          */
-//        downloadImage();
-//        imageDisplay();
-        Amplify.Storage.getUrl("image.jpg",
-                success ->{
-                    Log.i(TAG, "The root path is: " + getApplicationContext().getFilesDir());
-                    Log.i(TAG, "Successfully display: " + success.getUrl());
-                    Log.i(TAG, "image Data path => "+ success.getUrl().getPath());
-                    Log.i(TAG, "image Data File => "+ success.getUrl().getFile());
-                    Log.i(TAG, "image Data Ref => "+ success.getUrl().getRef());
-                    try {
-                        Log.i(TAG, "image Data URI => "+ success.getUrl().toURI());
-                    } catch (URISyntaxException e) {
-                        e.printStackTrace();
-                    }
+//        Amplify.Storage.getUrl("image.jpg",
+//                success ->{
+//                    Log.i(TAG, "The root path is: " + getApplicationContext().getFilesDir());
+////                    Log.i(TAG, "Successfully display: " + success.getUrl());
+//                    Log.i(TAG, "image Data path => "+ success.getUrl().getPath());
+//                    Log.i(TAG, "image Data File => "+ success.getUrl().getFile());
+//                    try {
+//                        Log.i(TAG, "Success ");
+//                        uri = Uri.parse( success.getUrl().toURI().toString() );
+//                    } catch (URISyntaxException e) {
+//                        e.printStackTrace();
+//                    }
+//                },
+//                error -> Log.e(TAG,  "display1 Failure", error)
+//        );
+        File file =new File(downloadImage()+"/"+imageKey+".jpg");
 
-//                    Picasso.get().load(url+success.getUrl().getPath()).into(imageView);
-//                    url = url+""+success.getUrl().getPath();
+        Picasso.get()
+                .load(file)
+                .into(imageView);
 
-                },
-                error -> Log.e(TAG,  "display Failure", error)
-        );
 
         String task = bundle.getString("SpecificData");
         String state = bundle.getString("stateData");
@@ -131,7 +140,6 @@ public class TaskDetails extends AppCompatActivity {
                 error -> Log.e("MyAmplifyApp", "Conversion failed", error)
         );
     }
-
     private void playAudio(InputStream data) {
         File mp3File = new File(getCacheDir(), "audio.mp3");
 
@@ -149,7 +157,6 @@ public class TaskDetails extends AppCompatActivity {
             Log.e("MyAmplifyApp", "Error writing audio file", error);
         }
     }
-
     private void textTranslate() {
 
         Amplify.Predictions.translateText(
@@ -163,30 +170,21 @@ public class TaskDetails extends AppCompatActivity {
                 error -> Log.e(TAG, "Translation failed", error)
         );
     }
+
     /**
      * Display image stuff
      */
-    private void imageDisplay() {
-//        Amplify.Storage.getUrl("image.jpg",
-//                success ->{
-//                    Log.i(TAG, "The root path is: " + getApplicationContext().getFilesDir());
-//                    Log.i(TAG, "Successfully display: " + success.getUrl());
-//                    Glide.with(this).load(getApplicationContext().getFilesDir().toURI()).into(imageView);
-//                    },
-//                error -> Log.e(TAG,  "display Failure", error)
-//        );
 
-    }
     private String downloadImage() {
-//        Amplify.Storage.downloadFile(
-//                "image.jpg",
-//                new File(getApplicationContext().getFilesDir() + "/download.jpg"),
-//                result -> {
-//                    Log.i(TAG, "The root path is: " + getApplicationContext().getFilesDir());
-//                    Log.i(TAG, "Successfully downloaded: " + result.getFile().getName().toString());
-//                },
-//                error -> Log.e(TAG,  "Download Failure", error)
-//        );
+
+        Amplify.Storage.downloadFile(
+                imageKey,
+                new File(getApplication().getFilesDir(),"/"+imageKey+".jpg"),
+                success -> {
+                    imageView.setImageBitmap(BitmapFactory.decodeFile(success.getFile().getPath()));
+                },
+                error -> Log.e(TAG,  "Download Failure", error)
+        );
         return ""+getApplicationContext().getFilesDir();
     }
 

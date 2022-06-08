@@ -24,6 +24,7 @@ public final class Task implements Model {
   public static final QueryField DESCRIPTION = field("Task", "description");
   public static final QueryField LATITUDE = field("Task", "latitude");
   public static final QueryField LONITUDE = field("Task", "Lonitude");
+  public static final QueryField IMAGE_KEY = field("Task", "imageKey");
   public static final QueryField STATUS = field("Task", "status");
   public static final QueryField TEAM_TASKS_ID = field("Task", "teamTasksId");
   private final @ModelField(targetType="ID", isRequired = true) String id;
@@ -31,6 +32,7 @@ public final class Task implements Model {
   private final @ModelField(targetType="String") String description;
   private final @ModelField(targetType="Float") Double latitude;
   private final @ModelField(targetType="Float") Double Lonitude;
+  private final @ModelField(targetType="String") String imageKey;
   private final @ModelField(targetType="String") String status;
   private final @ModelField(targetType="ID") String teamTasksId;
   public String getId() {
@@ -53,6 +55,10 @@ public final class Task implements Model {
       return Lonitude;
   }
   
+  public String getImageKey() {
+      return imageKey;
+  }
+  
   public String getStatus() {
       return status;
   }
@@ -61,12 +67,13 @@ public final class Task implements Model {
       return teamTasksId;
   }
   
-  private Task(String id, String title, String description, Double latitude, Double Lonitude, String status, String teamTasksId) {
+  private Task(String id, String title, String description, Double latitude, Double Lonitude, String imageKey, String status, String teamTasksId) {
     this.id = id;
     this.title = title;
     this.description = description;
     this.latitude = latitude;
     this.Lonitude = Lonitude;
+    this.imageKey = imageKey;
     this.status = status;
     this.teamTasksId = teamTasksId;
   }
@@ -84,6 +91,7 @@ public final class Task implements Model {
               ObjectsCompat.equals(getDescription(), task.getDescription()) &&
               ObjectsCompat.equals(getLatitude(), task.getLatitude()) &&
               ObjectsCompat.equals(getLonitude(), task.getLonitude()) &&
+              ObjectsCompat.equals(getImageKey(), task.getImageKey()) &&
               ObjectsCompat.equals(getStatus(), task.getStatus()) &&
               ObjectsCompat.equals(getTeamTasksId(), task.getTeamTasksId());
       }
@@ -97,6 +105,7 @@ public final class Task implements Model {
       .append(getDescription())
       .append(getLatitude())
       .append(getLonitude())
+      .append(getImageKey())
       .append(getStatus())
       .append(getTeamTasksId())
       .toString()
@@ -112,6 +121,7 @@ public final class Task implements Model {
       .append("description=" + String.valueOf(getDescription()) + ", ")
       .append("latitude=" + String.valueOf(getLatitude()) + ", ")
       .append("Lonitude=" + String.valueOf(getLonitude()) + ", ")
+      .append("imageKey=" + String.valueOf(getImageKey()) + ", ")
       .append("status=" + String.valueOf(getStatus()) + ", ")
       .append("teamTasksId=" + String.valueOf(getTeamTasksId()))
       .append("}")
@@ -138,6 +148,7 @@ public final class Task implements Model {
       null,
       null,
       null,
+      null,
       null
     );
   }
@@ -148,6 +159,7 @@ public final class Task implements Model {
       description,
       latitude,
       Lonitude,
+      imageKey,
       status,
       teamTasksId);
   }
@@ -162,6 +174,7 @@ public final class Task implements Model {
     BuildStep description(String description);
     BuildStep latitude(Double latitude);
     BuildStep lonitude(Double lonitude);
+    BuildStep imageKey(String imageKey);
     BuildStep status(String status);
     BuildStep teamTasksId(String teamTasksId);
   }
@@ -173,6 +186,7 @@ public final class Task implements Model {
     private String description;
     private Double latitude;
     private Double Lonitude;
+    private String imageKey;
     private String status;
     private String teamTasksId;
     @Override
@@ -185,6 +199,7 @@ public final class Task implements Model {
           description,
           latitude,
           Lonitude,
+          imageKey,
           status,
           teamTasksId);
     }
@@ -215,6 +230,12 @@ public final class Task implements Model {
     }
     
     @Override
+     public BuildStep imageKey(String imageKey) {
+        this.imageKey = imageKey;
+        return this;
+    }
+    
+    @Override
      public BuildStep status(String status) {
         this.status = status;
         return this;
@@ -238,12 +259,13 @@ public final class Task implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, String title, String description, Double latitude, Double lonitude, String status, String teamTasksId) {
+    private CopyOfBuilder(String id, String title, String description, Double latitude, Double lonitude, String imageKey, String status, String teamTasksId) {
       super.id(id);
       super.title(title)
         .description(description)
         .latitude(latitude)
         .lonitude(lonitude)
+        .imageKey(imageKey)
         .status(status)
         .teamTasksId(teamTasksId);
     }
@@ -266,6 +288,11 @@ public final class Task implements Model {
     @Override
      public CopyOfBuilder lonitude(Double lonitude) {
       return (CopyOfBuilder) super.lonitude(lonitude);
+    }
+    
+    @Override
+     public CopyOfBuilder imageKey(String imageKey) {
+      return (CopyOfBuilder) super.imageKey(imageKey);
     }
     
     @Override
