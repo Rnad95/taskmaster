@@ -9,6 +9,7 @@ mutation CreateTask(
     description
     latitude
     Lonitude
+    imageKey
     status
     createdAt
     updatedAt
@@ -28,6 +29,7 @@ mutation UpdateTask(
     description
     latitude
     Lonitude
+    imageKey
     status
     createdAt
     updatedAt
@@ -47,6 +49,7 @@ mutation DeleteTask(
     description
     latitude
     Lonitude
+    imageKey
     status
     createdAt
     updatedAt
@@ -70,6 +73,7 @@ mutation CreateTeam(
         description
         latitude
         Lonitude
+        imageKey
         status
         createdAt
         updatedAt
@@ -102,6 +106,7 @@ mutation UpdateTeam(
         description
         latitude
         Lonitude
+        imageKey
         status
         createdAt
         updatedAt
@@ -134,6 +139,7 @@ mutation DeleteTeam(
         description
         latitude
         Lonitude
+        imageKey
         status
         createdAt
         updatedAt

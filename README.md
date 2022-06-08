@@ -139,8 +139,23 @@ We created Final AAB and add it to the root.
 ![logout](screenshots/Lab36/logout.jpeg)
 ![logout click](screenshots/Lab36/logout-button.jpeg)
 
-5. AWS 
+5. AWS
 ![AWS](screenshots/Lab36/aws.png)
+
+## Lab - 37
+
+---
+Uploads
+On the “Add a Task” activity, allow users to optionally select an image to attach to that task. If a user attaches an image to a task, that image should be uploaded to S3, and associated with that task.
+![select image](screenshots/Lab37/select-image.jpeg)
+
+**AWS Side**
+
+![AWS side](screenshots/Lab37/aws-image.png)
+
+Displaying Files
+On the Task detail activity, if there is a file that is an image associated with a particular Task, that image should be displayed within that activity.
+![display](screenshots/Lab37/display-image.jpeg)
 
 ## Lab - 38
 

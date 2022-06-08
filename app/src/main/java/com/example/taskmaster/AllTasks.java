@@ -33,16 +33,6 @@ public class AllTasks extends AppCompatActivity implements TaskAdapter.OnTaskLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_third3);
 
-//        try {
-//            Amplify.addPlugin(new AWSApiPlugin());
-//            Amplify.addPlugin(new AWSDataStorePlugin());
-//            Amplify.configure(getApplicationContext());
-//
-//            Log.i(TAG, "Initialized Amplify");
-//        } catch (AmplifyException e) {
-//            Log.e(TAG, "Could not initialize Amplify", e);
-//        }
-
         handler = new Handler(Looper.getMainLooper(), msg -> {
             allTaskRecyclerView = findViewById(R.id.show_recycler_view);
             allTaskRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -55,6 +45,9 @@ public class AllTasks extends AppCompatActivity implements TaskAdapter.OnTaskLis
                 intent.putExtra("SpecificData",allTasks.get(position).getTitle());
                 intent.putExtra("stateData",allTasks.get(position).getStatus());
                 intent.putExtra("bodyData",allTasks.get(position).getDescription());
+                intent.putExtra("latitude",this.allTasks.get(position).getLatitude());
+                intent.putExtra("longitude",this.allTasks.get(position).getLonitude());
+                intent.putExtra("imageKey",allTasks.get(position).getImageKey());
                 startActivity(intent);
             });
             allTaskRecyclerView.setAdapter(adapter);
