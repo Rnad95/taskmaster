@@ -189,3 +189,16 @@ open aws dashboard using:
 2. Add a button to read and translate the task description
 
 ![](screenshots/Lab41/translate-the-description.jpeg)
+
+## Lab - 42
+
+---
+1. Add a banner ad
+![Banner](screenshots/Lab-42/Banner-ADS.jpeg)
+
+2. Add a button to display an interstitial ad
+![interstitial](screenshots/Lab-42/intersitial.gif)
+
+3. Add a button for a rewarded ad and After viewing the rewarded ad, display the reward in the main activity
+
+![rewarded](screenshots/Lab-42/reward.gif)

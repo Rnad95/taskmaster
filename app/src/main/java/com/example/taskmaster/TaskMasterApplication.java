@@ -14,6 +14,9 @@ import com.amplifyframework.geo.location.AWSLocationGeoPlugin;
 import com.amplifyframework.predictions.aws.AWSPredictionsPlugin;
 import com.amplifyframework.predictions.models.LanguageType;
 import com.amplifyframework.storage.s3.AWSS3StoragePlugin;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 
 public class TaskMasterApplication extends Application {
 
@@ -24,6 +27,11 @@ public class TaskMasterApplication extends Application {
         super.onCreate();
         configureAmplify();
         AnalysisAmplify();
+//        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+//            @Override
+//            public void onInitializationComplete(InitializationStatus initializationStatus) {
+//            }
+//        });
 
     }
 
